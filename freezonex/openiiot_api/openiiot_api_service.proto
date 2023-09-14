@@ -1,0 +1,13 @@
+syntax = "proto3";
+package freezonex.openiiot_api;
+
+import "freezonex/common/api.proto";
+import "freezonex/openiiot_api/demo.proto";
+
+service openiiot_api {
+
+  // demo
+  rpc GetNamespace(GetTestdataRequest) returns (GetTestdataResponse) {
+    option (api.post) = '/api/demo/test-data/get';
+  }
+}

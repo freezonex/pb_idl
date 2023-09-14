@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package base_req;
+
+import "freezonex/common/api.proto";
+option go_package = "code.byted.org/iiot/openiiot_api/biz/model/base_req";
+
+
+message PaginationRequest{
+  int32 count=1; // number of elements requested
+  int32 cursor=2; // offset to start from
+  string sort_key=3;
+  bool sort_descending=4;
+}
+
+// All request will contain BaseRequest
+message BaseRequest {
+  string auth_token = 1 [(api.header) = 'X-Custom-Token'];
+}

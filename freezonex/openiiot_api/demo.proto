@@ -1,0 +1,44 @@
+syntax = "proto3";
+package freezonex.openiiot_api;
+
+import "freezonex/common/api.proto";
+import "freezonex/common/base_req.proto";
+import "freezonex/common/base_resp.proto";
+
+
+message AirQuality {
+  string area = 1;
+  string nodeId = 2;
+  float temperature = 3;
+  float humidity = 4;
+  float volume = 5;
+  string status = 6;
+}
+
+message GetDemoAirQualityRequest {
+  base_req.BaseRequest base_request = 1;
+  string node_id = 2;
+}
+
+message GetDemoAirQualityResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated AirQuality data = 2;
+}
+
+message WaterMeter {
+  string area = 1;
+  string nodeId = 2;
+  float water_usage = 3;
+  float vibration_data = 4;
+  string status = 5;
+}
+
+message GetDemoWaterMeterRequest {
+  base_req.BaseRequest base_request = 1;
+  string node_id = 2;
+}
+
+message GetDemoWaterMeterResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated WaterMeter data = 2;
+}

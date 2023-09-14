@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package base_resp;
+
+option go_package = "freezonex/openiiot_api/biz/model/base_resp";
+
+// All response will contain BaseResponse
+message BaseResponse {
+  sint32 status_code = 1;
+  string status_message = 2;
+}
+
+// GeneralResponse is used for return early with only the BaseResponse
+message GeneralResponse {
+  BaseResponse base_resp = 1;
+}
+
+message PaginationResponse{
+  int32 count=1; // number of elements found
+  int32 cursor=2; // offset+count
+  int64 total_count=3; // total number of elements
+  string sort_key=4;
+  bool sort_descending=5;
+}
