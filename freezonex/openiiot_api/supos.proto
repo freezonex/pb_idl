@@ -1,0 +1,19 @@
+syntax = "proto3";
+package freezonex.openiiot_api;
+
+import "freezonex/common/api.proto";
+import "freezonex/common/base_resp.proto";
+import "freezonex/common/base_req.proto";
+//option go_package = "freezonex/openiiot/biz/model/openiiot_api_service";
+
+
+message GetSuposLoginUserRequest {
+  base_req.BaseRequest base_request = 1;
+}
+
+message GetSuposLoginUserResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string user_name = 2;
+  string user_role = 3;
+}
+

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package base_resp;
 
-option go_package = "freezonex/openiiot_api/biz/model/base_resp";
+option go_package = "freezonex/openiiot/biz/model/base_resp";
 
 // All response will contain BaseResponse
 message BaseResponse {

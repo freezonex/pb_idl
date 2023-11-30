@@ -1,0 +1,56 @@
+syntax = "proto3";
+package freezonex.openiiot_api;
+
+import "freezonex/common/api.proto";
+import "freezonex/common/base_resp.proto";
+import "freezonex/common/base_req.proto";
+
+message User {
+    string username = 1;
+    string userDesc = 2;
+    int32 accountType = 3;
+    int32 lockStatus = 4;
+    string personCode = 5;
+    string personName = 6;
+    string createTime = 7;
+    string modifyTime = 8;
+}
+
+message Pagination {
+    int32 total = 1;
+    int32 pageSize = 2;
+    int32 pageIndex = 3;
+}
+
+message UserSearch {
+    string keyword = 1;
+    int32 pageIndex = 2;
+    int32 pageSize = 3;
+    string companyCode = 4;
+}
+
+message GetCurrentUserRequest {
+  base_req.BaseRequest base_request = 1;
+}
+
+message GetCurrentUserResponse {
+  base_resp.BaseResponse base_resp = 1;
+  int32 code = 2;
+  string message = 3;
+  string data = 4;
+  //string user_role = 3;
+}
+
+message GetUserRequest {
+  base_req.BaseRequest base_request = 1;
+  UserSearch param = 2;
+}
+  
+message GetUserResponse {
+  base_resp.BaseResponse base_resp = 1;
+  int32 code = 2;
+  string message = 3;
+  Pagination pagination = 4;
+  repeated User list = 5;
+}
+  
