@@ -1,0 +1,42 @@
+syntax = "proto3";
+package freezonex.openiiot_api;
+
+import "freezonex/common/api.proto";
+import "freezonex/common/base_resp.proto";
+import "freezonex/common/base_req.proto";
+//option go_package = "freezonex/openiiot/biz/model/openiiot_api_service";
+
+
+message GrafanaAuthorizeRequest {
+  string redirect_uri = 1 [(api.query) = 'redirect_uri'];
+  string state = 2 [(api.query) = 'state'];
+}
+
+message GrafanaAuthorizeResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message GrafanaTokenRequest {
+  string code = 1;
+  string grant_type = 2;
+  string redirect_uri = 3;
+}
+
+message GrafanaTokenResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string access_token = 2;
+  string token_type = 3;
+  int32 expires_in = 4;
+  string refresh_token = 5;
+}
+
+message GrafanaUserInfoRequest {
+  string authorization = 1 [(api.header) = 'Authorization'];
+}
+
+message GrafanaUserInfoResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string email = 2;
+  string name = 3;
+  repeated string role = 4;
+}

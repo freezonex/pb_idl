@@ -1,0 +1,51 @@
+syntax = "proto3";
+package freezonex.openiiot_api;
+
+import "freezonex/common/api.proto";
+import "freezonex/common/base_resp.proto";
+import "freezonex/common/base_req.proto";
+
+message TDEngineDSN {
+    string name = 1;
+    string host = 2;
+    string username = 3;
+    string password = 4;
+}
+
+message TDEngineRow {
+  string time = 1;
+  float value = 2;
+}
+
+message TDEngineTestConnectionRequest {
+  base_req.BaseRequest base_request = 1;
+  TDEngineDSN dsn = 2;
+}
+
+message TDEngineTestConnectionResponse {
+  base_resp.BaseResponse base_resp = 1;
+  bool successful = 2;
+}
+
+message TDEngineExecRequest {
+  base_req.BaseRequest base_request = 1;
+  TDEngineDSN dsn = 2;
+  string sql = 3;
+}
+
+message TDEngineExecResponse {
+  base_resp.BaseResponse base_resp = 1;
+  int64 rows_affected = 3;
+}
+
+message TDEngineQueryRequest {
+  base_req.BaseRequest base_request = 1;
+  TDEngineDSN dsn = 2;
+  string sql = 3;
+}
+
+message TDEngineQueryResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated TDEngineRow data = 5;
+}
+  

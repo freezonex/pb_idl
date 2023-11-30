@@ -1,0 +1,30 @@
+syntax = "proto3";
+package freezonex.openiiot_api;
+
+import "freezonex/common/api.proto";
+import "freezonex/common/base_resp.proto";
+import "freezonex/common/base_req.proto";
+//option go_package = "freezonex/openiiot/biz/model/openiiot_api_service";
+
+
+message GetAccessTokenRequest {
+  string code = 1 [(api.query) = 'code'];
+}
+
+message GetAccessTokenResponse {
+  base_resp.BaseResponse base_resp = 1;
+  int64 code = 2;
+  string msg = 3;
+  string data = 4;
+}
+
+message LogoutRequest {
+  string token_key = 1 [(api.query) = 'tokenKey'];
+}
+
+message LogoutResponse {
+  base_resp.BaseResponse base_resp = 1;
+  int64 code = 2;
+  string msg = 3;
+  string data = 4;
+}

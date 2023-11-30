@@ -3,6 +3,7 @@ syntax = "proto2";
 package api;
 
 import "google/protobuf/descriptor.proto";
+//option go_package = "freezonex/openiiot/biz/model/api";
 
 extend google.protobuf.FieldOptions {
   optional string raw_body = 50101;

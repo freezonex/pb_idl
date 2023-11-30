@@ -3,7 +3,7 @@ syntax = "proto3";
 package base_req;
 
 import "freezonex/common/api.proto";
-option go_package = "code.byted.org/iiot/openiiot_api/biz/model/base_req";
+option go_package = "freezonex/openiiot/biz/model/base_req";
 
 
 message PaginationRequest{

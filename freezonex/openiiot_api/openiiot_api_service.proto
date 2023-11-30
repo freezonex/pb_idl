@@ -2,12 +2,50 @@ syntax = "proto3";
 package freezonex.openiiot_api;
 
 import "freezonex/common/api.proto";
-import "freezonex/openiiot_api/demo.proto";
+//import "freezonex/openiiot_api/supos.proto";
+import "freezonex/openiiot_api/auth.proto";
+import "freezonex/openiiot_api/user.proto";
+import "freezonex/openiiot_api/grafana.proto";
+import "freezonex/openiiot_api/tdengine.proto";
+//option go_package = "freezonex/openiiot/biz/model/openiiot_api_service";
 
 service openiiot_api {
 
-  // demo
-  rpc GetNamespace(GetTestdataRequest) returns (GetTestdataResponse) {
-    option (api.post) = '/api/demo/test-data/get';
+  // auth
+  rpc GetAccessToken(GetAccessTokenRequest) returns (GetAccessTokenResponse) {
+    option (api.post) = '/auth/accesstoken';
+  }
+  rpc Logout(LogoutRequest) returns (LogoutResponse) {
+    option (api.post) = '/auth/logout';
+  }
+
+  //user
+  rpc GetCurrentUser(GetCurrentUserRequest) returns (GetCurrentUserResponse) {
+    option (api.post) = '/user/current';
+  }
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+    option (api.post) = '/user/list';
+  }
+
+  // grafana
+  rpc GrafanaAuthorize(GrafanaAuthorizeRequest) returns (GrafanaAuthorizeResponse) {
+    option (api.post) = '/grafana/auth/authorize';
+  }
+  rpc GrafanaToken(GrafanaTokenRequest) returns (GrafanaTokenResponse) {
+    option (api.post) = '/grafana/auth/token';
+  }
+  rpc GrafanaUserInfo(GrafanaUserInfoRequest) returns (GrafanaUserInfoResponse) {
+    option (api.post) = '/grafana/userinfo';
+  }
+
+  // tdengine
+  rpc TDEngineTestConnection(TDEngineTestConnectionRequest) returns (TDEngineTestConnectionResponse) {
+    option (api.post) = '/tdengine/testconnection';
+  }
+  rpc TDEngineExec(TDEngineExecRequest) returns (TDEngineExecResponse) {
+    option (api.post) = '/tdengine/exec';
+  }
+  rpc TDEngineQuery(TDEngineQueryRequest) returns (TDEngineQueryResponse) {
+    option (api.post) = '/tdengine/query';
   }
 }
