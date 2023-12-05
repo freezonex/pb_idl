@@ -35,7 +35,7 @@ message TDEngineExecRequest {
 
 message TDEngineExecResponse {
   base_resp.BaseResponse base_resp = 1;
-  int64 rows_affected = 3;
+  int64 rows_affected = 2;
 }
 
 message TDEngineQueryRequest {
@@ -46,6 +46,7 @@ message TDEngineQueryRequest {
 
 message TDEngineQueryResponse {
   base_resp.BaseResponse base_resp = 1;
-  repeated TDEngineRow data = 5;
+  //repeated TDEngineRow data = 2;
+  string data = 2;
 }
   

@@ -16,13 +16,13 @@ message GrafanaAuthorizeResponse {
   base_resp.BaseResponse base_resp = 1;
 }
 
-message GrafanaTokenRequest {
+message GrafanaAccessTokenRequest {
   string code = 1;
   string grant_type = 2;
   string redirect_uri = 3;
 }
 
-message GrafanaTokenResponse {
+message GrafanaAccessTokenResponse {
   base_resp.BaseResponse base_resp = 1;
   string access_token = 2;
   string token_type = 3;
@@ -30,13 +30,26 @@ message GrafanaTokenResponse {
   string refresh_token = 5;
 }
 
-message GrafanaUserInfoRequest {
+message GrafanaUserRequest {
   string authorization = 1 [(api.header) = 'Authorization'];
 }
 
-message GrafanaUserInfoResponse {
+message GrafanaUserResponse {
   base_resp.BaseResponse base_resp = 1;
-  string email = 2;
-  string name = 3;
-  repeated string role = 4;
+  string sub = 2;
+  string email = 3;
+  string name = 4;
+  repeated string role = 5;
 }
+
+/*message GrafanaSearchUserRequest {
+  string loginOrEmail = 1 [(api.param) = 'Authorization'];
+}
+
+message GrafanaSearchUserResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string sub = 2;
+  string email = 3;
+  string name = 4;
+  repeated string role = 5;
+}*/

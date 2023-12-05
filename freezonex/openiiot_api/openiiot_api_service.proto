@@ -31,11 +31,11 @@ service openiiot_api {
   rpc GrafanaAuthorize(GrafanaAuthorizeRequest) returns (GrafanaAuthorizeResponse) {
     option (api.post) = '/grafana/auth/authorize';
   }
-  rpc GrafanaToken(GrafanaTokenRequest) returns (GrafanaTokenResponse) {
-    option (api.post) = '/grafana/auth/token';
+  rpc GrafanaToken(GrafanaAccessTokenRequest) returns (GrafanaAccessTokenResponse) {
+    option (api.post) = '/grafana/auth/accesstoken';
   }
-  rpc GrafanaUserInfo(GrafanaUserInfoRequest) returns (GrafanaUserInfoResponse) {
-    option (api.post) = '/grafana/userinfo';
+  rpc GrafanaUserInfo(GrafanaUserRequest) returns (GrafanaUserResponse) {
+    option (api.post) = '/grafana/user';
   }
 
   // tdengine
