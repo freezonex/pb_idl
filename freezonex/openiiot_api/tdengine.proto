@@ -38,6 +38,17 @@ message TDEngineExecResponse {
   int64 rows_affected = 2;
 }
 
+message TDEngineBatchExecRequest {
+  base_req.BaseRequest base_request = 1;
+  TDEngineDSN dsn = 2;
+  string sql = 3;   // sql statement split by ";"
+}
+
+message TDEngineBatchExecResponse {
+  base_resp.BaseResponse base_resp = 1;
+  int64 rows_affected = 2;
+}
+
 message TDEngineQueryRequest {
   base_req.BaseRequest base_request = 1;
   TDEngineDSN dsn = 2;
