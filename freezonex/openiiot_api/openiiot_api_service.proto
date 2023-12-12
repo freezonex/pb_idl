@@ -45,6 +45,9 @@ service openiiot_api {
   rpc TDEngineExec(TDEngineExecRequest) returns (TDEngineExecResponse) {
     option (api.post) = '/tdengine/exec';
   }
+  rpc TDEngineBatchExec(TDEngineBatchExecRequest) returns (TDEngineBatchExecResponse) {
+    option (api.post) = '/tdengine/batchexec';
+  }
   rpc TDEngineQuery(TDEngineQueryRequest) returns (TDEngineQueryResponse) {
     option (api.post) = '/tdengine/query';
   }
