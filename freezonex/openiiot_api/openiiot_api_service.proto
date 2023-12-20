@@ -38,6 +38,9 @@ service openiiot_api {
     option (api.post) = '/grafana/user';
   }
 
+  rpc GrafanaDataSources(GrafanaDataSourcesRequest) returns (GrafanaDataSourcesResponse) {
+    option (api.get) = '/grafana/datasources';
+  }
   // tdengine
   rpc TDEngineTestConnection(TDEngineTestConnectionRequest) returns (TDEngineTestConnectionResponse) {
     option (api.post) = '/tdengine/testconnection';

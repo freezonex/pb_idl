@@ -6,6 +6,34 @@ import "freezonex/common/base_resp.proto";
 import "freezonex/common/base_req.proto";
 //option go_package = "freezonex/openiiot/biz/model/openiiot_api_service";
 
+message DataSource {
+    int64 id = 1;
+    string uid = 2;
+    string name = 3;
+    string type = 4;
+    string typeLogoUrl = 5;
+    string url = 6;
+    string access = 7;
+    bool readOnly = 8;
+    string database = 9;
+    string user = 10;
+    int64 orgId = 11;
+    bool isDefault = 12;
+    bool basicAuth = 13;
+    string basicAuthUser = 14;
+    bool withCredentials = 15;
+    // JSONData and SecureJSONData can be represented as string in key-value format
+    // or you can define a more complex structure if needed
+    string jsonData = 16;
+    string secureJsonData = 17;
+    int32 version = 18;
+}
+
+message GrafanaDSN {
+  string host = 1;
+  string username = 2;
+  string password = 3;
+}
 
 message GrafanaAuthorizeRequest {
   string redirect_uri = 1 [(api.query) = 'redirect_uri'];
@@ -53,3 +81,12 @@ message GrafanaSearchUserResponse {
   string name = 4;
   repeated string role = 5;
 }*/
+
+message GrafanaDataSourcesRequest {
+  GrafanaDSN dsn = 1;
+}
+
+message GrafanaDataSourcesResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated DataSource dataSources = 2;
+}
