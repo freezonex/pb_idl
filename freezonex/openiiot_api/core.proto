@@ -1,0 +1,74 @@
+syntax = "proto3";
+package freezonex.openiiot_api;
+
+import "freezonex/common/api.proto";
+import "freezonex/common/base_resp.proto";
+import "freezonex/common/base_req.proto";
+
+message Core {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  int64 tenant_id = 4;
+  string url = 5;
+  string username = 6;
+  string password = 7;
+  string type = 8;
+  string create_time = 9;
+  string update_time = 10;
+}
+
+message AddCoreRequest {
+  base_req.BaseRequest base_request = 1;
+  string name = 2;
+  string description = 3;
+  int64 tenant_id = 4;
+  string url = 5;
+  string username = 6;
+  string password = 7;
+  string type = 8;
+}
+
+message AddCoreResponse {
+  base_resp.BaseResponse base_resp = 1;
+  int64 id = 2;
+}
+
+message GetCoreRequest {
+  base_req.BaseRequest base_request = 1;
+  int64 id = 2;
+  string name = 3;
+  int64 tenant_id = 4;
+  string url = 5;
+  string type = 6;
+}
+
+message GetCoreResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated Core data = 2;
+}
+
+message UpdateCoreRequest {
+  base_req.BaseRequest base_request = 1;
+  int64 id = 2;
+  string name = 3;
+  string description = 4;
+  int64 tenant_id = 5;
+  string url = 6;
+  string username = 7;
+  string password = 8;
+  string type = 9;
+}
+  
+message UpdateCoreResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message DeleteCoreRequest {
+  base_req.BaseRequest base_request = 1;
+  int64 id = 2;
+}
+  
+message DeleteCoreResponse {
+  base_resp.BaseResponse base_resp = 1;
+}

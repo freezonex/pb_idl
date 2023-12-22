@@ -6,27 +6,40 @@ import "freezonex/common/base_resp.proto";
 import "freezonex/common/base_req.proto";
 
 message User {
-    string username = 1;
-    string userDesc = 2;
-    int32 accountType = 3;
-    int32 lockStatus = 4;
-    string personCode = 5;
-    string personName = 6;
-    string createTime = 7;
-    string modifyTime = 8;
+  int64 id = 1;
+  string username = 2;
+  string password = 3;
+  string description = 4;
+  int64 tenant_id = 5;
+  string role = 6;
+  string auth_id = 7;
+  string source = 8;
+  string create_time = 9;
+  string update_time = 10;
+}
+
+message SuposUser {
+  string username = 1;
+  string userDesc = 2;
+  int32 accountType = 3;
+  int32 lockStatus = 4;
+  string personCode = 5;
+  string personName = 6;
+  string createTime = 7;
+  string modifyTime = 8;
 }
 
 message Pagination {
-    int32 total = 1;
-    int32 pageSize = 2;
-    int32 pageIndex = 3;
+  int32 total = 1;
+  int32 pageSize = 2;
+  int32 pageIndex = 3;
 }
 
-message UserSearch {
-    string keyword = 1;
-    int32 pageIndex = 2;
-    int32 pageSize = 3;
-    string companyCode = 4;
+message SuposUserSearch {
+  string keyword = 1;
+  int32 pageIndex = 2;
+  int32 pageSize = 3;
+  string companyCode = 4;
 }
 
 message GetCurrentUserRequest {
@@ -35,22 +48,73 @@ message GetCurrentUserRequest {
 
 message GetCurrentUserResponse {
   base_resp.BaseResponse base_resp = 1;
-  int32 code = 2;
-  string message = 3;
-  string data = 4;
-  //string user_role = 3;
+  User data = 2;
 }
 
-message GetUserRequest {
+message GetSuposUserRequest {
   base_req.BaseRequest base_request = 1;
-  UserSearch param = 2;
+  SuposUserSearch param = 2;
 }
   
-message GetUserResponse {
+message GetSuposUserResponse {
   base_resp.BaseResponse base_resp = 1;
   int32 code = 2;
   string message = 3;
   Pagination pagination = 4;
-  repeated User list = 5;
+  repeated SuposUser list = 5;
+}
+
+message AddUserRequest {
+  base_req.BaseRequest base_request = 1;
+  string username = 2;
+  string password = 3;
+  string description = 4;
+  int64 tenant_id = 5;
+  string role = 6;
+  string auth_id = 7;
+  string source = 8;
 }
   
+message AddUserResponse {
+  base_resp.BaseResponse base_resp = 1;
+  int64 id = 2;
+}
+
+message GetUserRequest {
+  base_req.BaseRequest base_request = 1;
+  string username = 2;
+  int64 tenant_id = 3;
+  string role = 4;
+  string auth_id = 5;
+  string source = 6;
+}
+  
+message GetUserResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated User data = 2;
+}
+
+message UpdateUserRequest {
+  base_req.BaseRequest base_request = 1;
+  int64 id = 2;
+  string username = 3;
+  string password = 4;
+  string description = 5;
+  int64 tenant_id = 6;
+  string role = 7;
+  string auth_id = 8;
+  string source = 9;
+}
+  
+message UpdateUserResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message DeleteUserRequest {
+  base_req.BaseRequest base_request = 1;
+  int64 id = 2;
+}
+  
+message DeleteUserResponse {
+  base_resp.BaseResponse base_resp = 1;
+}

@@ -4,7 +4,13 @@ package freezonex.openiiot_api;
 import "freezonex/common/api.proto";
 //import "freezonex/openiiot_api/supos.proto";
 import "freezonex/openiiot_api/auth.proto";
+import "freezonex/openiiot_api/tenant.proto";
 import "freezonex/openiiot_api/user.proto";
+import "freezonex/openiiot_api/edge.proto";
+import "freezonex/openiiot_api/core.proto";
+import "freezonex/openiiot_api/app.proto";
+import "freezonex/openiiot_api/flow.proto";
+import "freezonex/openiiot_api/global_config.proto";
 import "freezonex/openiiot_api/grafana.proto";
 import "freezonex/openiiot_api/tdengine.proto";
 //option go_package = "freezonex/openiiot/biz/model/openiiot_api_service";
@@ -19,12 +25,108 @@ service openiiot_api {
     option (api.post) = '/auth/logout';
   }
 
+  //tenant
+  rpc AddTenant(AddTenantRequest) returns (AddTenantResponse) {
+    option (api.post) = '/tenant/add';
+  }
+  rpc GetTenant(GetTenantRequest) returns (GetTenantResponse) {
+    option (api.post) = '/tenant/get';
+  }
+  rpc UpdateTenant(UpdateTenantRequest) returns (UpdateTenantResponse) {
+    option (api.post) = '/tenant/update';
+  }
+  rpc DeleteTenant(DeleteTenantRequest) returns (DeleteTenantResponse) {
+    option (api.post) = '/tenant/delete';
+  }
+
   //user
+  rpc AddUser(AddUserRequest) returns (AddUserResponse) {
+    option (api.post) = '/user/add';
+  }
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+    option (api.post) = '/user/get';
+  }
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+    option (api.post) = '/user/update';
+  }
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {
+    option (api.post) = '/user/delete';
+  }
   rpc GetCurrentUser(GetCurrentUserRequest) returns (GetCurrentUserResponse) {
     option (api.post) = '/user/current';
   }
-  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
-    option (api.post) = '/user/list';
+  rpc GetSuposUser(GetSuposUserRequest) returns (GetSuposUserResponse) {
+    option (api.post) = '/user/supos/list';
+  }
+
+  //edge
+  rpc AddEdge(AddEdgeRequest) returns (AddEdgeResponse) {
+    option (api.post) = '/edge/add';
+  }
+  rpc GetEdge(GetEdgeRequest) returns (GetEdgeResponse) {
+    option (api.post) = '/edge/get';
+  }
+  rpc UpdateEdge(UpdateEdgeRequest) returns (UpdateEdgeResponse) {
+    option (api.post) = '/edge/update';
+  }
+  rpc DeleteEdge(DeleteEdgeRequest) returns (DeleteEdgeResponse) {
+    option (api.post) = '/edge/delete';
+  }
+
+  //core
+  rpc AddCore(AddCoreRequest) returns (AddCoreResponse) {
+    option (api.post) = '/core/add';
+  }
+  rpc GetCore(GetCoreRequest) returns (GetCoreResponse) {
+    option (api.post) = '/core/get';
+  }
+  rpc UpdateCore(UpdateCoreRequest) returns (UpdateCoreResponse) {
+    option (api.post) = '/core/update';
+  }
+  rpc DeleteCore(DeleteCoreRequest) returns (DeleteCoreResponse) {
+    option (api.post) = '/core/delete';
+  }
+
+  //app
+  rpc AddApp(AddAppRequest) returns (AddAppResponse) {
+    option (api.post) = '/app/add';
+  }
+  rpc GetApp(GetAppRequest) returns (GetAppResponse) {
+    option (api.post) = '/app/get';
+  }
+  rpc UpdateApp(UpdateAppRequest) returns (UpdateAppResponse) {
+    option (api.post) = '/app/update';
+  }
+  rpc DeleteApp(DeleteAppRequest) returns (DeleteAppResponse) {
+    option (api.post) = '/app/delete';
+  }
+  
+  //flow
+  rpc AddFlow(AddFlowRequest) returns (AddFlowResponse) {
+    option (api.post) = '/flow/add';
+  }
+  rpc GetFlow(GetFlowRequest) returns (GetFlowResponse) {
+    option (api.post) = '/flow/get';
+  }
+  rpc UpdateFlow(UpdateFlowRequest) returns (UpdateFlowResponse) {
+    option (api.post) = '/flow/update';
+  }
+  rpc DeleteFlow(DeleteFlowRequest) returns (DeleteFlowResponse) {
+    option (api.post) = '/flow/delete';
+  }
+
+  //flow
+  rpc AddGlobalConfig(AddGlobalConfigRequest) returns (AddGlobalConfigResponse) {
+    option (api.post) = '/global-config/add';
+  }
+  rpc GetGlobalConfig(GetGlobalConfigRequest) returns (GetGlobalConfigResponse) {
+    option (api.post) = '/global-config/get';
+  }
+  rpc UpdateGlobalConfig(UpdateGlobalConfigRequest) returns (UpdateGlobalConfigResponse) {
+    option (api.post) = '/global-config/update';
+  }
+  rpc DeleteGlobalConfig(DeleteGlobalConfigRequest) returns (DeleteGlobalConfigResponse) {
+    option (api.post) = '/global-config/delete';
   }
 
   // grafana
