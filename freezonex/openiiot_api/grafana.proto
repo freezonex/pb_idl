@@ -126,6 +126,14 @@ message GrafanaCreateDataSourceResponse {
   base_resp.BaseResponse base_resp = 1;
   string message = 2;
 }
+message GrafanaDeleteDataSourceRequest {
+  GrafanaDSN dsn = 1;
+  string name = 2;
+}
+message GrafanaDeleteDataSourceResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string message = 2;
+}
 
 message GrafanaCreateDashboardRequest {
   GrafanaDSN dsn = 1;

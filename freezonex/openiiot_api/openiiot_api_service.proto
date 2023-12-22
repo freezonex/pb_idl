@@ -44,6 +44,9 @@ service openiiot_api {
   rpc GrafanaCreateDataSource(GrafanaCreateDataSourceRequest) returns (GrafanaCreateDataSourceResponse) {
     option (api.post) = '/grafana/datasource/createds';
   }
+  rpc GrafanaDeleteDataSource(GrafanaDeleteDataSourceRequest) returns (GrafanaDeleteDataSourceResponse) {
+    option (api.post) = '/grafana/datasource/delete';
+  }
   rpc GrafanaCreateDashboard(GrafanaCreateDashboardRequest) returns (GrafanaCreateDashboardResponse) {
     option (api.post) = '/grafana/dashboard/createdb';
   }
