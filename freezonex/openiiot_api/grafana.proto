@@ -108,11 +108,11 @@ message GrafanaSearchUserResponse {
   repeated string role = 5;
 }*/
 
-message GrafanaDataSourcesRequest {
+message GrafanaGetDataSourceRequest {
   GrafanaDSN dsn = 1;
 }
 
-message GrafanaDataSourcesResponse {
+message GrafanaGetDataSourceRequest {
   base_resp.BaseResponse base_resp = 1;
   repeated DataSource dataSources = 2;
 }
