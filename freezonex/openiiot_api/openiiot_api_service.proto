@@ -39,7 +39,16 @@ service openiiot_api {
   }
 
   rpc GrafanaDataSources(GrafanaDataSourcesRequest) returns (GrafanaDataSourcesResponse) {
-    option (api.get) = '/grafana/datasources';
+    option (api.get) = '/grafana/datasource/getall';
+  }
+  rpc GrafanaCreateDataSource(GrafanaCreateDataSourceRequest) returns (GrafanaCreateDataSourceResponse) {
+    option (api.post) = '/grafana/datasource/createds';
+  }
+  rpc GrafanaCreateDashboard(GrafanaCreateDashboardRequest) returns (GrafanaCreateDashboardResponse) {
+    option (api.post) = '/grafana/dashboard/createdb';
+  }
+  rpc GrafanaSaveDashboardByUid(GrafanaSaveDashboardByUidRequest) returns (GrafanaSaveDashboardByUidResponse) {
+    option (api.post) = '/grafana/dashboard/savebyuid';
   }
   // tdengine
   rpc TDEngineTestConnection(TDEngineTestConnectionRequest) returns (TDEngineTestConnectionResponse) {

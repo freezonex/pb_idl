@@ -35,6 +35,32 @@ message GrafanaDSN {
   string password = 3;
 }
 
+message DashboardMeta {
+  bool isStarred = 1;
+  string slug = 2;
+  int64 folderId = 3;
+  string folderUid = 4;
+  string url = 5;
+}
+
+message Dashboard {
+  // we use a string to represent the serialized JSON structure.
+  string model = 1;
+  int64 folderId = 2;
+  DashboardMeta meta = 3;
+  bool overwrite = 4;
+  string message = 5;
+  string folderUid = 6;
+}
+
+message DashboardSaveResponse {
+  string slug = 1;
+  int64 id = 2;
+  string uid = 3;
+  string status = 4;
+  int64 version = 5;
+}
+
 message GrafanaAuthorizeRequest {
   string redirect_uri = 1 [(api.query) = 'redirect_uri'];
   string state = 2 [(api.query) = 'state'];
@@ -89,4 +115,35 @@ message GrafanaDataSourcesRequest {
 message GrafanaDataSourcesResponse {
   base_resp.BaseResponse base_resp = 1;
   repeated DataSource dataSources = 2;
+}
+
+message GrafanaCreateDataSourceRequest {
+  GrafanaDSN dsn = 1;
+  DataSource dataSource = 2;
+}
+
+message GrafanaCreateDataSourceResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string message = 2;
+}
+
+message GrafanaCreateDashboardRequest {
+  GrafanaDSN dsn = 1;
+  Dashboard dashboard = 2;
+}
+
+message GrafanaCreateDashboardResponse {
+  base_resp.BaseResponse base_resp = 1;
+  DashboardSaveResponse saveResponse = 2;
+}
+
+message GrafanaSaveDashboardByUidRequest {
+  GrafanaDSN dsn = 1;
+  string uid = 2;
+  string savePath = 3;
+}
+
+message GrafanaSaveDashboardByUidResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string message= 2;
 }
