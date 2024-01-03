@@ -140,20 +140,20 @@ service openiiot_api {
     option (api.post) = '/grafana/user';
   }
 
-  rpc GrafanaDataSources(GrafanaDataSourcesRequest) returns (GrafanaDataSourcesResponse) {
-    option (api.get) = '/grafana/datasource/getall';
+  rpc GrafanaGetDataSource(GrafanaGetDataSourceRequest) returns (GrafanaGetDataSourceResponse) {
+    option (api.get) = '/grafana/datasource/get';
   }
   rpc GrafanaCreateDataSource(GrafanaCreateDataSourceRequest) returns (GrafanaCreateDataSourceResponse) {
-    option (api.post) = '/grafana/datasource/createds';
+    option (api.post) = '/grafana/datasource/create';
   }
   rpc GrafanaDeleteDataSource(GrafanaDeleteDataSourceRequest) returns (GrafanaDeleteDataSourceResponse) {
     option (api.post) = '/grafana/datasource/delete';
   }
   rpc GrafanaCreateDashboard(GrafanaCreateDashboardRequest) returns (GrafanaCreateDashboardResponse) {
-    option (api.post) = '/grafana/dashboard/createdb';
+    option (api.post) = '/grafana/dashboard/create';
   }
   rpc GrafanaSaveDashboardByUid(GrafanaSaveDashboardByUidRequest) returns (GrafanaSaveDashboardByUidResponse) {
-    option (api.post) = '/grafana/dashboard/savebyuid';
+    option (api.post) = '/grafana/dashboard/save/uid';
   }
   // tdengine
   rpc TDEngineTestConnection(TDEngineTestConnectionRequest) returns (TDEngineTestConnectionResponse) {
