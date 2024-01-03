@@ -11,6 +11,7 @@ import "freezonex/openiiot_api/core.proto";
 import "freezonex/openiiot_api/app.proto";
 import "freezonex/openiiot_api/flow.proto";
 import "freezonex/openiiot_api/global_config.proto";
+import "freezonex/openiiot_api/emqx.proto";
 import "freezonex/openiiot_api/grafana.proto";
 import "freezonex/openiiot_api/tdengine.proto";
 //option go_package = "freezonex/openiiot/biz/model/openiiot_api_service";
@@ -129,6 +130,10 @@ service openiiot_api {
     option (api.post) = '/global-config/delete';
   }
 
+  //emqx
+  rpc EmqxGetStatus(EmqxGetStatusRequest) returns (EmqxGetStatusResponse) {
+    option (api.get) = "/emqx/status";
+  }
   // grafana
   rpc GrafanaAuthorize(GrafanaAuthorizeRequest) returns (GrafanaAuthorizeResponse) {
     option (api.post) = '/grafana/auth/authorize';

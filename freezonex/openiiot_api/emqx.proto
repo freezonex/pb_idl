@@ -1,0 +1,29 @@
+syntax = "proto3";
+package freezonex.openiiot_api;
+
+import "freezonex/common/api.proto";
+import "freezonex/common/base_resp.proto";
+import "freezonex/common/base_req.proto";
+
+message EmqxDSN {
+    string host = 1;
+    string username = 2;
+    string password = 3;
+}
+
+message EmqxStatusStruct {
+  string rel_vsn = 1;
+  string node_name = 2;
+  string broker_status = 3;
+  string app_status = 4;
+}
+
+message EmqxGetStatusRequest {
+  base_req.BaseRequest base_request = 1;
+  EmqxDSN dsn = 2;
+}
+
+message EmqxGetStatusResponse {
+  base_resp.BaseResponse base_resp = 1;
+  EmqxStatusStruct status = 2;
+}
