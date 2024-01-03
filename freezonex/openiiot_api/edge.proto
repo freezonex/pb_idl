@@ -66,7 +66,7 @@ message UpdateEdgeResponse {
 
 message DeleteEdgeRequest {
   base_req.BaseRequest base_request = 1;
-  string id = 2;
+  int64 id = 2;
 }
   
 message DeleteEdgeResponse {
