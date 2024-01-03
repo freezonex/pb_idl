@@ -1,0 +1,68 @@
+syntax = "proto3";
+package freezonex.openiiot_api;
+
+import "freezonex/common/api.proto";
+import "freezonex/common/base_resp.proto";
+import "freezonex/common/base_req.proto";
+
+message Flow {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  int64 tenant_id = 4;
+  string last_modified_by = 5;
+  repeated int64 edge_ids = 6;
+  repeated int64 core_ids = 7;
+  repeated int64 app_ids = 8;
+  string create_time = 9;
+  string update_time = 10;
+}
+
+message AddFlowRequest {
+  base_req.BaseRequest base_request = 1;
+  string name = 2;
+  string description = 3;
+  int64 tenant_id = 4;
+}
+
+message AddFlowResponse {
+  base_resp.BaseResponse base_resp = 1;
+  int64 id = 2;
+}
+
+message GetFlowRequest {
+  base_req.BaseRequest base_request = 1;
+  int64 id = 2;
+  string name = 3;
+  int64 tenant_id = 4;
+  string last_modified_by = 5;
+}
+
+message GetFlowResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated Flow data = 2;
+}
+
+message UpdateFlowRequest {
+  base_req.BaseRequest base_request = 1;
+  int64 id = 2;
+  string name = 3;
+  string description = 4;
+  int64 tenant_id = 5;
+  repeated int64 edge_ids = 6;
+  repeated int64 core_ids = 7;
+  repeated int64 app_ids = 8;
+}
+  
+message UpdateFlowResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message DeleteFlowRequest {
+  base_req.BaseRequest base_request = 1;
+  int64 id = 2;
+}
+  
+message DeleteFlowResponse {
+  base_resp.BaseResponse base_resp = 1;
+}

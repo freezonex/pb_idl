@@ -6,10 +6,10 @@ import "freezonex/common/base_resp.proto";
 import "freezonex/common/base_req.proto";
 
 message TDEngineDSN {
-    string name = 1;
-    string host = 2;
-    string username = 3;
-    string password = 4;
+  string name = 1;
+  string host = 2;
+  string username = 3;
+  string password = 4;
 }
 
 message TDEngineRow {
