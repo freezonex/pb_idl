@@ -112,7 +112,7 @@ message GrafanaGetDataSourceRequest {
   GrafanaDSN dsn = 1;
 }
 
-message GrafanaGetDataSourceRequest {
+message GrafanaGetDataSourceResponse {
   base_resp.BaseResponse base_resp = 1;
   repeated DataSource dataSources = 2;
 }
