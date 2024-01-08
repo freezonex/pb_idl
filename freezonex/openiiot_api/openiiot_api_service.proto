@@ -134,6 +134,13 @@ service openiiot_api {
   rpc EmqxGetStatus(EmqxGetStatusRequest) returns (EmqxGetStatusResponse) {
     option (api.get) = "/emqx/status";
   }
+  rpc EmqxCreateBridge(EmqxCreateBridgeRequest) returns (EmqxCreateBridgeResponse) {
+    option (api.post) = "/emqx/bridge/create";
+  }
+  rpc EmqxCreateRule(EmqxCreateRuleRequest) returns (EmqxCreateRuleResponse) {
+    option (api.post) = "/emqx/rule/create";
+  }
+
   // grafana
   rpc GrafanaAuthorize(GrafanaAuthorizeRequest) returns (GrafanaAuthorizeResponse) {
     option (api.post) = '/grafana/auth/authorize';

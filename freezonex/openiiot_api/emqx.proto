@@ -10,6 +10,68 @@ message EmqxDSN {
     string username = 2;
     string password = 3;
 }
+message SSLConfig {
+  bool enable = 1;
+}
+
+message ResourceOpts {
+  int32 worker_pool_size = 1;
+  int64 max_buffer_bytes = 2;
+  int32 inflight_window = 3;
+  string query_mode = 4;
+  int64 health_check_interval = 5;
+}
+
+message BridgeConfig {
+  string name = 1;
+  string type = 2;
+  SSLConfig ssl = 3;
+  string connect_timeout = 4;
+  int32 pool_size = 5;
+  bool enable = 6;
+  string body = 7;
+  string method = 8;
+  string url = 9;
+  int32 max_retries = 10;
+  string request_timeout = 11;
+  string pool_type = 12;
+  ResourceOpts resource_opts = 13;
+  int32 enable_pipelining = 14;
+  string local_topic = 15;
+}
+
+message NodeStatus {
+  string node = 1;
+  string status = 2;
+  string status_reason = 3;
+}
+
+// Main message for a bridge status response
+message BridgeStatusResponse {
+  string status = 1;
+  string status_reason = 2;
+  repeated NodeStatus node_status = 3; // Assuming there can be multiple node statuses.
+  string type = 4;
+  string name = 5;
+  bool enable = 6;
+  string url = 7;
+  // Add other fields as per your API specification...
+}
+
+message Rule {
+  string name = 1;
+  string sql = 2;
+  repeated string actions = 3;
+  bool enable = 4;
+  string description = 5;
+}
+message RuleResponseStruct {
+  string id = 1;
+  repeated string from = 2;
+  string created_at = 3;
+  string name = 4;
+  string sql = 5;
+}
 
 message EmqxStatusStruct {
   string rel_vsn = 1;
@@ -26,4 +88,26 @@ message EmqxGetStatusRequest {
 message EmqxGetStatusResponse {
   base_resp.BaseResponse base_resp = 1;
   EmqxStatusStruct status = 2;
+}
+
+message EmqxCreateBridgeRequest {
+  base_req.BaseRequest base_request = 1;
+  EmqxDSN dsn = 2;
+  BridgeConfig bridge = 3;
+}
+
+message EmqxCreateBridgeResponse {
+  base_resp.BaseResponse base_resp = 1;
+  BridgeStatusResponse bridge_status = 2;
+}
+
+message EmqxCreateRuleRequest {
+  base_req.BaseRequest base_request = 1;
+  EmqxDSN dsn = 2;
+  Rule rule = 3;
+}
+
+message EmqxCreateRuleResponse {
+  base_resp.BaseResponse base_resp = 1;
+  RuleResponseStruct rule_resp = 2;
 }
