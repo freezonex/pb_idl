@@ -11,6 +11,7 @@ import "freezonex/openiiot_api/core.proto";
 import "freezonex/openiiot_api/app.proto";
 import "freezonex/openiiot_api/flow.proto";
 import "freezonex/openiiot_api/global_config.proto";
+import "freezonex/openiiot_api/emqx.proto";
 import "freezonex/openiiot_api/grafana.proto";
 import "freezonex/openiiot_api/tdengine.proto";
 //option go_package = "freezonex/openiiot/biz/model/openiiot_api_service";
@@ -127,6 +128,17 @@ service openiiot_api {
   }
   rpc DeleteGlobalConfig(DeleteGlobalConfigRequest) returns (DeleteGlobalConfigResponse) {
     option (api.post) = '/global-config/delete';
+  }
+
+  //emqx
+  rpc EmqxGetStatus(EmqxGetStatusRequest) returns (EmqxGetStatusResponse) {
+    option (api.get) = "/emqx/status";
+  }
+  rpc EmqxCreateBridge(EmqxCreateBridgeRequest) returns (EmqxCreateBridgeResponse) {
+    option (api.post) = "/emqx/bridge/create";
+  }
+  rpc EmqxCreateRule(EmqxCreateRuleRequest) returns (EmqxCreateRuleResponse) {
+    option (api.post) = "/emqx/rule/create";
   }
 
   // grafana
