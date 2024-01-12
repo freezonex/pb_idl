@@ -21,7 +21,7 @@ message TDEngineTestConnectionRequest {
   base_req.BaseRequest base_request = 1;
   TDEngineDSN dsn = 2;
 }
-  
+
 message TDEngineTestConnectionResponse {
   base_resp.BaseResponse base_resp = 1;
   bool successful = 2;
