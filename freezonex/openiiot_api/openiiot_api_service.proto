@@ -25,6 +25,10 @@ service openiiot_api {
   rpc Logout(LogoutRequest) returns (LogoutResponse) {
     option (api.post) = '/auth/logout';
   }
+  rpc Login(LoginRequest) returns (LoginResponse) {
+    option (api.post) = '/auth/login';
+  }
+
 
   //tenant
   rpc AddTenant(AddTenantRequest) returns (AddTenantResponse) {
@@ -39,6 +43,10 @@ service openiiot_api {
   rpc DeleteTenant(DeleteTenantRequest) returns (DeleteTenantResponse) {
     option (api.post) = '/tenant/delete';
   }
+  rpc GetAllTenantName(GetAllTenantNameRequest) returns (GetAllTenantNameResponse) {
+    option (api.post) = '/tenant/allname';
+  }
+
 
   //user
   rpc AddUser(AddUserRequest) returns (AddUserResponse) {
