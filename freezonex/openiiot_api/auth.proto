@@ -28,3 +28,15 @@ message LogoutResponse {
   string msg = 3;
   string data = 4;
 }
+
+message LoginRequest {
+  base_req.BaseRequest base_request = 1;
+  string username = 2; // Username for login
+  string password = 3; // Password for login
+  string  tenant_name = 4; // Optional tenant name, if applicable
+}
+
+message LoginResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string accesstoken = 2; //user token
+}
