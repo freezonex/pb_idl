@@ -4,7 +4,6 @@ package freezonex.openiiot_api;
 import "freezonex/common/api.proto";
 import "freezonex/common/base_resp.proto";
 import "freezonex/common/base_req.proto";
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 message User {
   int64 id = 1;
@@ -113,7 +112,7 @@ message UpdateUserResponse {
 
 message DeleteUserRequest {
   base_req.BaseRequest base_request = 1;
-  int64 id = 2 [(gogoproto.customtype) = "github.com/gogo/protobuf/types.Int64Value", (gogoproto.jsontag) = "id,string"];
+  int64 id = 2;
 }
   
 message DeleteUserResponse {
