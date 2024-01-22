@@ -189,3 +189,4 @@ service openiiot_api {
     option (api.post) = '/tdengine/query';
   }
 }
+
