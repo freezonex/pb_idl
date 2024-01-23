@@ -19,7 +19,7 @@ import "freezonex/openiiot_api/tdengine.proto";
 service openiiot_api {
 
   // auth
-  rpc GetAccessToken1(GetAccessTokenRequest) returns (GetAccessTokenResponse) {
+  rpc GetAccessToken(GetAccessTokenRequest) returns (GetAccessTokenResponse) {
     option (api.post) = '/auth/accesstoken';
   }
   rpc Logout(LogoutRequest) returns (LogoutResponse) {
