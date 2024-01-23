@@ -56,3 +56,14 @@ message DeleteTenantRequest {
 message DeleteTenantResponse {
   base_resp.BaseResponse base_resp = 1;
 }
+
+message GetAllTenantNameRequest {
+  base_req.BaseRequest base_request = 1;
+}
+
+message GetAllTenantNameResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated string tenant_names = 2;
+}
+
+

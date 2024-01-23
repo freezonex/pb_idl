@@ -11,6 +11,7 @@ import "freezonex/openiiot_api/core.proto";
 import "freezonex/openiiot_api/app.proto";
 import "freezonex/openiiot_api/flow.proto";
 import "freezonex/openiiot_api/global_config.proto";
+import "freezonex/openiiot_api/emqx.proto";
 import "freezonex/openiiot_api/grafana.proto";
 import "freezonex/openiiot_api/tdengine.proto";
 //option go_package = "freezonex/openiiot/biz/model/openiiot_api_service";
@@ -24,6 +25,10 @@ service openiiot_api {
   rpc Logout(LogoutRequest) returns (LogoutResponse) {
     option (api.post) = '/auth/logout';
   }
+  rpc Login(LoginRequest) returns (LoginResponse) {
+    option (api.post) = '/auth/login';
+  }
+
 
   //tenant
   rpc AddTenant(AddTenantRequest) returns (AddTenantResponse) {
@@ -38,6 +43,10 @@ service openiiot_api {
   rpc DeleteTenant(DeleteTenantRequest) returns (DeleteTenantResponse) {
     option (api.post) = '/tenant/delete';
   }
+  rpc GetAllTenantName(GetAllTenantNameRequest) returns (GetAllTenantNameResponse) {
+    option (api.post) = '/tenant/allname';
+  }
+
 
   //user
   rpc AddUser(AddUserRequest) returns (AddUserResponse) {
@@ -129,6 +138,17 @@ service openiiot_api {
     option (api.post) = '/global-config/delete';
   }
 
+  //emqx
+  rpc EmqxGetStatus(EmqxGetStatusRequest) returns (EmqxGetStatusResponse) {
+    option (api.get) = "/emqx/status";
+  }
+  rpc EmqxCreateBridge(EmqxCreateBridgeRequest) returns (EmqxCreateBridgeResponse) {
+    option (api.post) = "/emqx/bridge/create";
+  }
+  rpc EmqxCreateRule(EmqxCreateRuleRequest) returns (EmqxCreateRuleResponse) {
+    option (api.post) = "/emqx/rule/create";
+  }
+
   // grafana
   rpc GrafanaAuthorize(GrafanaAuthorizeRequest) returns (GrafanaAuthorizeResponse) {
     option (api.post) = '/grafana/auth/authorize';
@@ -169,3 +189,4 @@ service openiiot_api {
     option (api.post) = '/tdengine/query';
   }
 }
+

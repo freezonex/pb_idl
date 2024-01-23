@@ -25,6 +25,9 @@ message AddFlowRequest {
   string description = 3;
   int64 tenant_id = 4;
   string flow_type = 5;
+  repeated int64 edge_ids = 7;
+  repeated int64 core_ids = 8;
+  repeated int64 app_ids = 9;
 }
 
 message AddFlowResponse {
