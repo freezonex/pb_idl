@@ -10,7 +10,7 @@ message User {
   string username = 2;
   string password = 3;
   string description = 4;
-  int64 tenant_id = 5;
+  string tenant_id = 5;
   string role = 6;
   string auth_id = 7;
   string source = 8;
