@@ -6,10 +6,10 @@ import "freezonex/common/base_resp.proto";
 import "freezonex/common/base_req.proto";
 
 message Edge {
-  int64 id = 1;
+  string id = 1;
   string name = 2;
   string description = 3;
-  int64 tenant_id = 4;
+  string tenant_id = 4;
   string url = 5;
   string username = 6;
   string password = 7;
@@ -22,7 +22,7 @@ message AddEdgeRequest {
   base_req.BaseRequest base_request = 1;
   string name = 2;
   string description = 3;
-  int64 tenant_id = 4;
+  string tenant_id = 4;
   string url = 5;
   string username = 6;
   string password = 7;
@@ -31,14 +31,14 @@ message AddEdgeRequest {
 
 message AddEdgeResponse {
   base_resp.BaseResponse base_resp = 1;
-  int64 id = 2;
+  string id = 2;
 }
 
 message GetEdgeRequest {
   base_req.BaseRequest base_request = 1;
-  int64 id = 2;
+  string id = 2;
   string name = 3;
-  int64 tenant_id = 4;
+  string tenant_id = 4;
   string url = 5;
   string type = 6;
 }
@@ -50,10 +50,10 @@ message GetEdgeResponse {
 
 message UpdateEdgeRequest {
   base_req.BaseRequest base_request = 1;
-  int64 id = 2;
+  string id = 2;
   string name = 3;
   string description = 4;
-  int64 tenant_id = 5;
+  string tenant_id = 5;
   string url = 6;
   string username = 7;
   string password = 8;
@@ -66,7 +66,7 @@ message UpdateEdgeResponse {
 
 message DeleteEdgeRequest {
   base_req.BaseRequest base_request = 1;
-  int64 id = 2;
+  string id = 2;
 }
   
 message DeleteEdgeResponse {
