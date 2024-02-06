@@ -127,6 +127,6 @@ message GetUserByTokenRequest {
 
 message GetUserByTokenResponse {
   base_resp.BaseResponse base_resp = 1;
-  User user = 2;
+  User data = 2;
   bool  exist = 3;
 }
