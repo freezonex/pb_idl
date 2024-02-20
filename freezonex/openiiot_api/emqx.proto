@@ -21,7 +21,10 @@ message ResourceOpts {
   string query_mode = 4;
   int64 health_check_interval = 5;
 }
-
+message BridgeHeaders {
+  string key = 1;
+  string value = 2;
+}
 message BridgeConfig {
   string name = 1;
   string type = 2;
@@ -38,6 +41,7 @@ message BridgeConfig {
   ResourceOpts resource_opts = 13;
   int32 enable_pipelining = 14;
   string local_topic = 15;
+  map<string, string> headers = 16;
 }
 
 message NodeStatus {
