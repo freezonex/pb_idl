@@ -118,3 +118,15 @@ message DeleteUserRequest {
 message DeleteUserResponse {
   base_resp.BaseResponse base_resp = 1;
 }
+
+
+message GetUserByTokenRequest {
+  base_req.BaseRequest base_request = 1;
+  string accesstoken = 2;
+}
+
+message GetUserByTokenResponse {
+  base_resp.BaseResponse base_resp = 1;
+  User data = 2;
+  bool  exist = 3;
+}

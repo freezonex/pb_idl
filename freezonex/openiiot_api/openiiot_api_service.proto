@@ -67,6 +67,9 @@ service openiiot_api {
   rpc GetSuposUser(GetSuposUserRequest) returns (GetSuposUserResponse) {
     option (api.post) = '/user/supos/list';
   }
+  rpc GetUserByToken(GetUserByTokenRequest) returns (GetUserByTokenResponse) {
+    option (api.post) = '/user/getuserbytoken';
+  }
 
   //edge
   rpc AddEdge(AddEdgeRequest) returns (AddEdgeResponse) {
