@@ -38,6 +38,7 @@ message BridgeConfig {
   ResourceOpts resource_opts = 13;
   int32 enable_pipelining = 14;
   string local_topic = 15;
+  map<string, string> headers = 16;
 }
 
 message NodeStatus {
