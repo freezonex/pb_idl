@@ -126,6 +126,9 @@ service openiiot_api {
   rpc DeleteFlow(DeleteFlowRequest) returns (DeleteFlowResponse) {
     option (api.post) = '/flow/delete';
   }
+  rpc LoadDemoFlow(LoadDemoFlowRequest) returns (LoadDemoFlowResponse) {
+    option (api.post) = '/flow/loaddemoflow';//
+  }
 
   //flow
   rpc AddGlobalConfig(AddGlobalConfigRequest) returns (AddGlobalConfigResponse) {
