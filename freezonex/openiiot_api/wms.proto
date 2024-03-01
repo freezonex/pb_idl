@@ -1,0 +1,440 @@
+syntax = "proto3";
+package freezonex.openiiot_api;
+
+import "freezonex/common/api.proto";
+import "freezonex/common/base_resp.proto";
+import "freezonex/common/base_req.proto";
+
+// 1. warehouse
+message Warehouse {
+  string id = 1;
+  string name = 2;
+  string warehouse_id = 3;
+  string type = 4;
+  string manager = 5;
+  string department = 6;
+  string email = 7;
+  string project_group = 8;
+  string note = 9;
+  repeated StorageLocation storage_locations = 10;
+  string create_time = 11;
+  string update_time = 12;
+}
+
+message AddWarehouseRequest {
+  base_req.BaseRequest base_request = 1;
+  string name = 2;
+  string warehouse_id = 3;
+  string type = 4;
+  string manager = 5;
+  string department = 6;
+  string email = 7;
+  string project_group = 8;
+  string note = 9;
+}
+
+message AddWarehouseResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string id = 2;
+}
+
+message GetWarehouseRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string name = 3;
+  string warehouse_id = 4;
+  string type = 5;
+  string manager = 6;
+  string department = 7;
+  string email = 8;
+  string project_group = 9;
+}
+
+message GetWarehouseResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated Warehouse data = 2;
+}
+
+message UpdateWarehouseRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string name = 3;
+  string warehouse_id = 4;
+  string type = 5;
+  string manager = 6;
+  string department = 7;
+  string email = 8;
+  string project_group = 9;
+  string note = 10;
+}
+  
+message UpdateWarehouseResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message DeleteWarehouseRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+}
+  
+message DeleteWarehouseResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+
+//2. storage location
+message StorageLocation {
+  string id = 1;
+  string warehouse_id = 2;
+  string name = 3;
+  bool occupied = 4;
+  string material_name = 5;
+  string create_time = 6;
+  string update_time = 7;
+}
+
+message AddStorageLocationResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string id = 2;
+}
+
+message GetStorageLocationRequest {
+  base_req.BaseRequest base_request = 1;
+  string warehouse_id = 2;
+  string name = 3;
+  bool occupied = 4;
+  string material_name = 5;
+}
+
+message GetStorageLocationResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated StorageLocation data = 2;
+}
+
+message UpdateStorageLocationRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string warehouse_id = 3;
+  string name = 4;
+  bool occupied = 5;
+  string material_name = 6;
+}
+  
+message UpdateStorageLocationResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message DeleteStorageLocationRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+}
+  
+message DeleteStorageLocationResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+// Material message definition
+message Material {
+  string id = 1;
+  string product_code = 2;
+  string name = 3;
+  string storage_location = 4; // '0' indicates not in repository yet
+  string product_type = 5;
+  string unit = 6;
+  string note = 7;
+  string create_time = 8;
+  string update_time = 9;
+}
+
+// Request and Response messages
+message AddMaterialRequest {
+  base_req.BaseRequest base_request = 1;
+  string product_code = 2;
+  string name = 3;
+  string storage_location = 4;
+  string product_type = 5;
+  string unit = 6;
+  string note = 7;
+}
+
+message AddMaterialResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string id = 2;
+}
+
+message GetMaterialRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string product_code = 3;
+}
+
+message GetMaterialResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated Material data = 2;
+}
+
+message UpdateMaterialRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string product_code = 3;
+  string name = 4;
+  string storage_location = 5;
+  string product_type = 6;
+  string unit = 7;
+  string note = 8;
+}
+
+message UpdateMaterialResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message DeleteMaterialRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+}
+
+message DeleteMaterialResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+
+// Inbound message definition
+message Inbound {
+  string id = 1;
+  string ref_id = 2; // Format: yyyymmdd0000
+  string type = 3; // Inbound type
+  string storage_location = 4;
+  string material_name = 5;
+  string operator = 6;
+  string create_time = 7;
+  string update_time = 8;
+}
+
+// Request and Response messages
+message AddInboundRequest {
+  base_req.BaseRequest base_request = 1;
+  string ref_id = 2;
+  string type = 3;
+  string storage_location = 4;
+  string material_name = 5;
+  string operator = 6;
+}
+
+message AddInboundResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string id = 2;
+}
+
+message GetInboundRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string ref_id = 3;
+}
+
+message GetInboundResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated Inbound data = 2;
+}
+
+message UpdateInboundRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string ref_id = 3;
+  string type = 4;
+  string storage_location = 5;
+  string material_name = 6;
+  string operator = 7;
+}
+
+message UpdateInboundResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message DeleteInboundRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+}
+
+message DeleteInboundResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+// InboundRecord message definition
+message InboundRecord {
+  string id = 1;
+  string inbound_id = 2;
+  string rfid = 3;
+  string material_id = 4;
+  string create_time = 5;
+  string update_time = 6;
+}
+
+// Request and Response messages
+message AddInboundRecordRequest {
+  base_req.BaseRequest base_request = 1;
+  string inbound_id = 2;
+  string rfid = 3;
+  string material_id = 4;
+}
+
+message AddInboundRecordResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string id = 2;
+}
+
+message GetInboundRecordRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  // Optional: Additional fields for filtering can be added here
+}
+
+message GetInboundRecordResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated InboundRecord data = 2;
+}
+
+message UpdateInboundRecordRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string inbound_id = 3;
+  string rfid = 4;
+  string material_id = 5;
+}
+
+message UpdateInboundRecordResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message DeleteInboundRecordRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+}
+
+message DeleteInboundRecordResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+
+// Outbound message definition
+message Outbound {
+  string id = 1;
+  string ref_id = 2; // Format: yyyymmdd0000
+  string type = 3; // Outbound type
+  string storage_location = 4;
+  string material_name = 5;
+  string operator = 6;
+  string create_time = 7;
+  string update_time = 8;
+}
+
+// Request and Response messages
+message AddOutboundRequest {
+  base_req.BaseRequest base_request = 1;
+  string ref_id = 2;
+  string type = 3;
+  string storage_location = 4;
+  string material_name = 5;
+  string operator = 6;
+}
+
+message AddOutboundResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string id = 2;
+}
+
+message GetOutboundRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string ref_id = 3;
+  // Optional: Additional fields for filtering can be added here
+}
+
+message GetOutboundResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated Outbound data = 2;
+}
+
+message UpdateOutboundRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string ref_id = 3;
+  string type = 4;
+  string storage_location = 5;
+  string material_name = 6;
+  string operator = 7;
+}
+
+message UpdateOutboundResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message DeleteOutboundRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+}
+
+message DeleteOutboundResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+
+// Stocktaking message definition
+message Stocktaking {
+  string id = 1;
+  string ref_id = 2; // Format: yyyymmdd0000
+  string type = 3; // Stocktaking type
+  string storage_location = 4;
+  string operator = 5;
+  string result = 6; // Detailed result of stocktaking
+  string create_time = 7;
+  string update_time = 8;
+}
+
+// Request and Response messages
+message AddStocktakingRequest {
+  base_req.BaseRequest base_request = 1;
+  string ref_id = 2;
+  string type = 3;
+  string storage_location = 4;
+  string operator = 5;
+  string result = 6;
+}
+
+message AddStocktakingResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string id = 2;
+}
+
+message GetStocktakingRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string ref_id = 3; // Optional for filtering by ref_id
+}
+
+message GetStocktakingResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated Stocktaking data = 2;
+}
+
+message UpdateStocktakingRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string ref_id = 3;
+  string type = 4;
+  string storage_location = 5;
+  string operator = 6;
+  string result = 7;
+}
+
+message UpdateStocktakingResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message DeleteStocktakingRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+}
+
+message DeleteStocktakingResponse {
+  base_resp.BaseResponse base_resp = 1;
+}

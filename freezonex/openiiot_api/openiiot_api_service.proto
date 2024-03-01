@@ -194,5 +194,101 @@ service openiiot_api {
   rpc TDEngineQuery(TDEngineQueryRequest) returns (TDEngineQueryResponse) {
     option (api.post) = '/tdengine/query';
   }
+
+  //wms warehouse
+  rpc AddWarehouse(AddWarehouseRequest) returns (AddWarehouseResponse) {
+    option (api.post) = '/wms/warehouse/add';
+  }
+  rpc GetWarehouse(GetWarehouseRequest) returns (GetWarehouseResponse) {
+    option (api.post) = '/wms/warehouse/get';
+  }
+  rpc UpdateWarehouse(UpdateWarehouseRequest) returns (UpdateWarehouseResponse) {
+    option (api.post) = '/wms/warehouse/update';
+  }
+  rpc DeleteWarehouse(DeleteWarehouseRequest) returns (DeleteWarehouseResponse) {
+    option (api.post) = '/wms/warehouse/delete';
+  }
+
+
+  rpc AddStorageLocation(AddStorageLocationRequest) returns (AddStorageLocationResponse) {
+    option (api.post) = '/wms/storagelocation/add';
+  }
+  rpc GetStorageLocation(GetStorageLocationRequest) returns (GetStorageLocationResponse) {
+    option (api.post) = '/wms/storagelocation/get';
+  }
+  rpc UpdateStorageLocation(UpdateStorageLocationRequest) returns (UpdateStorageLocationResponse) {
+    option (api.post) = '/wms/storagelocation/update';
+  }
+  rpc DeleteStorageLocation(DeleteStorageLocationRequest) returns (DeleteStorageLocationResponse) {
+    option (api.post) = '/wms/storagelocation/delete';
+  }
+
+
+  rpc AddMaterial(AddMaterialRequest) returns (AddMaterialResponse) {
+    option (api.post) = '/wms/material/add';
+  }
+  rpc GetMaterial(GetMaterialRequest) returns (GetMaterialResponse) {
+    option (api.post) = '/wms/material/get';
+  }
+  rpc UpdateMaterial(UpdateMaterialRequest) returns (UpdateMaterialResponse) {
+    option (api.post) = '/wms/material/update';
+  }
+  rpc DeleteMaterial(DeleteMaterialRequest) returns (DeleteMaterialResponse) {
+    option (api.post) = '/wms/material/delete';
+  }
+
+  rpc AddInbound(AddInboundRequest) returns (AddInboundResponse) {
+    option (api.post) = '/wms/inbound/add';
+  }
+  rpc GetInbound(GetInboundRequest) returns (GetInboundResponse) {
+    option (api.post) = '/wms/inbound/get';
+  }
+  rpc UpdateInbound(UpdateInboundRequest) returns (UpdateInboundResponse) {
+    option (api.post) = '/wms/inbound/update';
+  }
+  rpc DeleteInbound(DeleteInboundRequest) returns (DeleteInboundResponse) {
+    option (api.post) = '/wms/inbound/delete';
+  }
+
+  rpc AddInboundRecord(AddInboundRecordRequest) returns (AddInboundRecordResponse) {
+    option (api.post) = '/wms/inboundrecord/add';
+  }
+  rpc GetInboundRecord(GetInboundRecordRequest) returns (GetInboundRecordResponse) {
+    option (api.post) = '/wms/inboundrecord/get';
+  }
+  rpc UpdateInboundRecord(UpdateInboundRecordRequest) returns (UpdateInboundRecordResponse) {
+    option (api.post) = '/wms/inboundrecord/update';
+  }
+  rpc DeleteInboundRecord(DeleteInboundRecordRequest) returns (DeleteInboundRecordResponse) {
+    option (api.post) = '/wms/inboundrecord/delete';
+  }
+
+  rpc AddOutbound(AddOutboundRequest) returns (AddOutboundResponse) {
+    option (api.post) = '/wms/outbound/add';
+  }
+  rpc GetOutbound(GetOutboundRequest) returns (GetOutboundResponse) {
+    option (api.post) = '/wms/outbound/get';
+  }
+  rpc UpdateOutbound(UpdateOutboundRequest) returns (UpdateOutboundResponse) {
+    option (api.post) = '/wms/outbound/update';
+  }
+  rpc DeleteOutbound(DeleteOutboundRequest) returns (DeleteOutboundResponse) {
+    option (api.post) = '/wms/outbound/delete';
+  }
+
+
+  rpc AddStocktaking(AddStocktakingRequest) returns (AddStocktakingResponse) {
+    option (api.post) = '/wms/stocktaking/add';
+  }
+  rpc GetStocktaking(GetStocktakingRequest) returns (GetStocktakingResponse) {
+    option (api.post) = '/wms/stocktaking/get';
+  }
+  rpc UpdateStocktaking(UpdateStocktakingRequest) returns (UpdateStocktakingResponse) {
+    option (api.post) = '/wms/stocktaking/update';
+  }
+  rpc DeleteStocktaking(DeleteStocktakingRequest) returns (DeleteStocktakingResponse) {
+    option (api.post) = '/wms/stocktaking/delete';
+  }
+
 }
 
