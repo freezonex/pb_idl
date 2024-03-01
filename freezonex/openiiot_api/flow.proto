@@ -73,3 +73,18 @@ message DeleteFlowRequest {
 message DeleteFlowResponse {
   base_resp.BaseResponse base_resp = 1;
 }
+
+
+message LoadDemoFlowRequest {
+  base_req.BaseRequest base_request = 1;
+  string tenant_id = 2;
+  string tenant_name = 3;
+  string demo_name = 4;
+  string demo_flow_id = 5;
+}
+//
+
+message LoadDemoFlowResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string id = 2;
+}
