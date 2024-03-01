@@ -93,6 +93,14 @@ message StorageLocation {
   string update_time = 7;
 }
 
+message AddStorageLocationRequest {
+  base_req.BaseRequest base_request = 1;
+  string warehouse_id = 2;
+  string name = 3;
+  bool occupied = 4;
+  string material_name = 5;
+}
+
 message AddStorageLocationResponse {
   base_resp.BaseResponse base_resp = 1;
   string id = 2;
