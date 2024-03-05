@@ -48,6 +48,7 @@ message GetWarehouseRequest {
   string department = 7;
   string email = 8;
   string project_group = 9;
+  bool return_all_storelocations = 10;
 }
 
 message GetWarehouseResponse {
@@ -82,7 +83,7 @@ message DeleteWarehouseResponse {
 }
 
 
-//2. storage location
+// 2. storage location
 message StorageLocation {
   string id = 1;
   string warehouse_id = 2;
@@ -110,8 +111,6 @@ message GetStorageLocationRequest {
   base_req.BaseRequest base_request = 1;
   string warehouse_id = 2;
   string name = 3;
-  bool occupied = 4;
-  string material_name = 5;
 }
 
 message GetStorageLocationResponse {
@@ -141,28 +140,33 @@ message DeleteStorageLocationResponse {
   base_resp.BaseResponse base_resp = 1;
 }
 
-// Material message definition
+// 3. Material
 message Material {
   string id = 1;
   string product_code = 2;
   string name = 3;
-  string storage_location = 4; // '0' indicates not in repository yet
-  string product_type = 5;
-  string unit = 6;
-  string note = 7;
-  string create_time = 8;
-  string update_time = 9;
+  string rfid = 4;
+  string warehouse_id = 5;
+  string storage_location_id = 6;
+  string storage_location = 7;
+  string product_type = 8;
+  string unit = 9;
+  string note = 10;
+  string create_time = 11;
+  string update_time = 12;
 }
 
-// Request and Response messages
 message AddMaterialRequest {
   base_req.BaseRequest base_request = 1;
   string product_code = 2;
   string name = 3;
-  string storage_location = 4;
-  string product_type = 5;
-  string unit = 6;
-  string note = 7;
+  string rfid = 4;
+  string warehouse_id = 5;
+  string storage_location_id = 6;
+  string storage_location = 7;
+  string product_type = 8;
+  string unit = 9;
+  string note = 10;
 }
 
 message AddMaterialResponse {
@@ -174,6 +178,10 @@ message GetMaterialRequest {
   base_req.BaseRequest base_request = 1;
   string id = 2;
   string product_code = 3;
+  string name = 4;
+  string rfid = 5;
+  string warehouse_id = 6;
+  string storage_location_id = 7;
 }
 
 message GetMaterialResponse {
@@ -186,10 +194,13 @@ message UpdateMaterialRequest {
   string id = 2;
   string product_code = 3;
   string name = 4;
-  string storage_location = 5;
-  string product_type = 6;
-  string unit = 7;
-  string note = 8;
+  string rfid = 5;
+  string warehouse_id = 6;
+  string storage_location_id = 7;
+  string storage_location = 8;
+  string product_type = 9;
+  string unit = 10;
+  string note = 11;
 }
 
 message UpdateMaterialResponse {
@@ -206,26 +217,29 @@ message DeleteMaterialResponse {
 }
 
 
-// Inbound message definition
+// 4. Inbound
 message Inbound {
   string id = 1;
   string ref_id = 2; // Format: yyyymmdd0000
   string type = 3; // Inbound type
-  string storage_location = 4;
-  string material_name = 5;
-  string operator = 6;
-  string create_time = 7;
-  string update_time = 8;
+  string storage_location_id = 4;
+  string storage_location = 5;
+  string material_name = 6;
+  string source = 7;    // PDA or manual
+  string operator = 8;
+  string create_time = 9;
+  string update_time = 10;
 }
 
-// Request and Response messages
 message AddInboundRequest {
   base_req.BaseRequest base_request = 1;
-  string ref_id = 2;
-  string type = 3;
-  string storage_location = 4;
-  string material_name = 5;
-  string operator = 6;
+  string type = 2;
+  string storage_location_id = 3;
+  string material_name = 4;
+  string source = 5;    // PDA or manual
+  repeated string rfids = 6;          //source is PDA
+  repeated string material_ids = 7;   //source is manual
+  
 }
 
 message AddInboundResponse {
@@ -237,6 +251,9 @@ message GetInboundRequest {
   base_req.BaseRequest base_request = 1;
   string id = 2;
   string ref_id = 3;
+  string type = 4;
+  string storage_location_id = 5;
+  string material_name = 6;
 }
 
 message GetInboundResponse {
@@ -249,9 +266,8 @@ message UpdateInboundRequest {
   string id = 2;
   string ref_id = 3;
   string type = 4;
-  string storage_location = 5;
+  string storage_location_id = 5;
   string material_name = 6;
-  string operator = 7;
 }
 
 message UpdateInboundResponse {
@@ -267,33 +283,19 @@ message DeleteInboundResponse {
   base_resp.BaseResponse base_resp = 1;
 }
 
-// InboundRecord message definition
+// 5. Inbound Material Detail
 message InboundRecord {
   string id = 1;
   string inbound_id = 2;
-  string rfid = 3;
-  string material_id = 4;
+  Material material = 3;
   string create_time = 5;
   string update_time = 6;
-}
-
-// Request and Response messages
-message AddInboundRecordRequest {
-  base_req.BaseRequest base_request = 1;
-  string inbound_id = 2;
-  string rfid = 3;
-  string material_id = 4;
-}
-
-message AddInboundRecordResponse {
-  base_resp.BaseResponse base_resp = 1;
-  string id = 2;
 }
 
 message GetInboundRecordRequest {
   base_req.BaseRequest base_request = 1;
   string id = 2;
-  // Optional: Additional fields for filtering can be added here
+  string inbound_id = 3;
 }
 
 message GetInboundRecordResponse {
@@ -301,48 +303,25 @@ message GetInboundRecordResponse {
   repeated InboundRecord data = 2;
 }
 
-message UpdateInboundRecordRequest {
-  base_req.BaseRequest base_request = 1;
-  string id = 2;
-  string inbound_id = 3;
-  string rfid = 4;
-  string material_id = 5;
-}
-
-message UpdateInboundRecordResponse {
-  base_resp.BaseResponse base_resp = 1;
-}
-
-message DeleteInboundRecordRequest {
-  base_req.BaseRequest base_request = 1;
-  string id = 2;
-}
-
-message DeleteInboundRecordResponse {
-  base_resp.BaseResponse base_resp = 1;
-}
-
-
-// Outbound message definition
+// 6. Outbound
 message Outbound {
   string id = 1;
   string ref_id = 2; // Format: yyyymmdd0000
   string type = 3; // Outbound type
-  string storage_location = 4;
-  string material_name = 5;
-  string operator = 6;
-  string create_time = 7;
-  string update_time = 8;
+  repeated string storage_location_ids = 4;
+  repeated string storage_locations = 5;
+  string material_name = 6;
+  string operator = 7;
+  string create_time = 8;
+  string update_time = 9;
 }
 
 // Request and Response messages
 message AddOutboundRequest {
   base_req.BaseRequest base_request = 1;
-  string ref_id = 2;
-  string type = 3;
-  string storage_location = 4;
-  string material_name = 5;
-  string operator = 6;
+  string type = 2;
+  repeated string storage_location_ids = 3;
+  string material_name = 4;
 }
 
 message AddOutboundResponse {
@@ -354,7 +333,8 @@ message GetOutboundRequest {
   base_req.BaseRequest base_request = 1;
   string id = 2;
   string ref_id = 3;
-  // Optional: Additional fields for filtering can be added here
+  string type = 4;
+  string storage_location_id = 5;
 }
 
 message GetOutboundResponse {
@@ -367,9 +347,8 @@ message UpdateOutboundRequest {
   string id = 2;
   string ref_id = 3;
   string type = 4;
-  string storage_location = 5;
+  string storage_location_id = 5;
   string material_name = 6;
-  string operator = 7;
 }
 
 message UpdateOutboundResponse {
@@ -385,27 +364,51 @@ message DeleteOutboundResponse {
   base_resp.BaseResponse base_resp = 1;
 }
 
+// 7. Outbound Material Detail
+message OutboundRecord {
+  string id = 1;
+  string outbound_id = 2;
+  Material material = 3;
+  string create_time = 5;
+  string update_time = 6;
+}
 
-// Stocktaking message definition
+message GetOutboundRecordRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string outbound_id = 3;
+}
+
+message GetOutboundRecordResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated OutboundRecord data = 2;
+}
+
+// 8. Stocktaking
 message Stocktaking {
   string id = 1;
   string ref_id = 2; // Format: yyyymmdd0000
   string type = 3; // Stocktaking type
-  string storage_location = 4;
-  string operator = 5;
-  string result = 6; // Detailed result of stocktaking
-  string create_time = 7;
-  string update_time = 8;
+  repeated string storage_location_ids = 4;
+  repeated string storage_locations = 5;
+  string operator = 6;
+  string result = 7; // Detailed result of stocktaking
+  string create_time = 8;
+  string update_time = 9;
+}
+
+message StocktakingItem {
+  string storage_location_id = 1;
+  repeated string rfids = 2;
 }
 
 // Request and Response messages
 message AddStocktakingRequest {
   base_req.BaseRequest base_request = 1;
-  string ref_id = 2;
-  string type = 3;
-  string storage_location = 4;
-  string operator = 5;
-  string result = 6;
+  string type = 2;
+  string source = 3;    //PDA or manual
+  repeated StocktakingItem items = 4;   //only for PDA scan
+  string result = 5;
 }
 
 message AddStocktakingResponse {
@@ -416,7 +419,8 @@ message AddStocktakingResponse {
 message GetStocktakingRequest {
   base_req.BaseRequest base_request = 1;
   string id = 2;
-  string ref_id = 3; // Optional for filtering by ref_id
+  string ref_id = 3;
+  string type = 4;
 }
 
 message GetStocktakingResponse {
@@ -429,9 +433,7 @@ message UpdateStocktakingRequest {
   string id = 2;
   string ref_id = 3;
   string type = 4;
-  string storage_location = 5;
-  string operator = 6;
-  string result = 7;
+  string result = 5;
 }
 
 message UpdateStocktakingResponse {
