@@ -82,14 +82,18 @@ message DeleteWarehouseResponse {
   base_resp.BaseResponse base_resp = 1;
 }
 
-
 // 2. storage location
+message StorageLocationMaterial {
+  Material material = 1;
+  int32 quantity = 2;
+}
+
 message StorageLocation {
   string id = 1;
   string warehouse_id = 2;
   string name = 3;
   bool occupied = 4;
-  string material_name = 5;
+  repeated StorageLocationMaterial materials = 5;
   string create_time = 6;
   string update_time = 7;
 }
@@ -99,7 +103,6 @@ message AddStorageLocationRequest {
   string warehouse_id = 2;
   string name = 3;
   bool occupied = 4;
-  string material_name = 5;
 }
 
 message AddStorageLocationResponse {
@@ -111,6 +114,7 @@ message GetStorageLocationRequest {
   base_req.BaseRequest base_request = 1;
   string warehouse_id = 2;
   string name = 3;
+  bool return_all_materials = 10;
 }
 
 message GetStorageLocationResponse {
@@ -124,7 +128,6 @@ message UpdateStorageLocationRequest {
   string warehouse_id = 3;
   string name = 4;
   bool occupied = 5;
-  string material_name = 6;
 }
   
 message UpdateStorageLocationResponse {
@@ -145,7 +148,6 @@ message Material {
   string id = 1;
   string product_code = 2;
   string name = 3;
-  string rfid = 4;
   string warehouse_id = 5;
   string storage_location_id = 6;
   string storage_location = 7;
@@ -216,30 +218,95 @@ message DeleteMaterialResponse {
   base_resp.BaseResponse base_resp = 1;
 }
 
+// 4. Tag RFID to Material
+message RfidMaterial {
+  string id = 1;
+  string rfid = 2;
+  string material_id = 3;
+  int32 quantity = 4;
+  Material material = 5;
+  string create_time = 6;
+  string update_time = 7;
+}
 
-// 4. Inbound
+message AddRfidMaterialRequest {
+  base_req.BaseRequest base_request = 1;
+  string rfid = 2;
+  string material_id = 3;
+  int32 quantity = 4;
+}
+
+message AddRfidMaterialResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string id = 2;
+}
+
+message GetRfidMaterialRequest {
+  base_req.BaseRequest base_request = 1;
+  string rfid = 2;
+  string material_id = 3;
+  int32 quantity = 4;
+}
+
+message GetRfidMaterialResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated RfidMaterial data = 2;
+}
+
+message UpdateRfidMaterialRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string rfid = 3;
+  string material_id = 4;
+  int32 quantity = 5;
+}
+
+message UpdateRfidMaterialResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message DeleteRfidMaterialRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+}
+
+message DeleteRfidMaterialResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+// 5. Define common structure for inbound, outbound and stocktaking
+message Inventory {
+  string rfid = 1;
+  string material_id = 2;
+  int32 quantity = 3;
+  Material material = 4;                      
+  int32 stock_quantity = 5;
+  int32 discrepancy = 6;
+}
+
+message ShelfInventory {
+  string storage_location_id = 1;
+  repeated Inventory inventory = 2;
+}
+
+// 6. Inbound
 message Inbound {
   string id = 1;
-  string ref_id = 2; // Format: yyyymmdd0000
-  string type = 3; // Inbound type
-  string storage_location_id = 4;
-  string storage_location = 5;
-  string material_name = 6;
-  string source = 7;    // PDA or manual
-  string operator = 8;
-  string create_time = 9;
-  string update_time = 10;
+  string ref_id = 2;                            // Format: yyyymmdd0000
+  string type = 3;                              // Inbound type
+  string source = 4;                            // PDA or manual
+  string note = 5;
+  string operator = 6;
+  string status = 7;                            //workflow: Done, Executing, To-do
+  string create_time = 8;
+  string update_time = 9;
 }
 
 message AddInboundRequest {
   base_req.BaseRequest base_request = 1;
   string type = 2;
-  string storage_location_id = 3;
-  string material_name = 4;
-  string source = 5;    // PDA or manual
-  repeated string rfids = 6;          //source is PDA
-  repeated string material_ids = 7;   //source is manual
-  
+  string source = 3;                            // PDA or manual
+  repeated ShelfInventory shelf_records = 6;    //source is PDA
 }
 
 message AddInboundResponse {
@@ -252,8 +319,6 @@ message GetInboundRequest {
   string id = 2;
   string ref_id = 3;
   string type = 4;
-  string storage_location_id = 5;
-  string material_name = 6;
 }
 
 message GetInboundResponse {
@@ -266,8 +331,6 @@ message UpdateInboundRequest {
   string id = 2;
   string ref_id = 3;
   string type = 4;
-  string storage_location_id = 5;
-  string material_name = 6;
 }
 
 message UpdateInboundResponse {
@@ -283,45 +346,36 @@ message DeleteInboundResponse {
   base_resp.BaseResponse base_resp = 1;
 }
 
-// 5. Inbound Material Detail
-message InboundRecord {
-  string id = 1;
-  string inbound_id = 2;
-  Material material = 3;
-  string create_time = 5;
-  string update_time = 6;
-}
-
+// 7. Inbound Material Detail
 message GetInboundRecordRequest {
   base_req.BaseRequest base_request = 1;
   string id = 2;
-  string inbound_id = 3;
+  string ref_id = 3;
 }
 
 message GetInboundRecordResponse {
   base_resp.BaseResponse base_resp = 1;
-  repeated InboundRecord data = 2;
+  repeated ShelfInventory data = 2;
 }
 
-// 6. Outbound
+// 8. Outbound, all are same with Inbound
 message Outbound {
   string id = 1;
-  string ref_id = 2; // Format: yyyymmdd0000
-  string type = 3; // Outbound type
-  repeated string storage_location_ids = 4;
-  repeated string storage_locations = 5;
-  string material_name = 6;
-  string operator = 7;
+  string ref_id = 2;                            // Format: yyyymmdd0000
+  string type = 3;                              // Outbound type
+  string source = 4;                            // PDA or manual
+  string note = 5;
+  string operator = 6;
+  string status = 7;                            //workflow: Done, Executing, To-do
   string create_time = 8;
   string update_time = 9;
 }
 
-// Request and Response messages
 message AddOutboundRequest {
   base_req.BaseRequest base_request = 1;
   string type = 2;
-  repeated string storage_location_ids = 3;
-  string material_name = 4;
+  string source = 3;                            // PDA or manual
+  repeated ShelfInventory shelf_records = 6;    //source is PDA
 }
 
 message AddOutboundResponse {
@@ -334,7 +388,6 @@ message GetOutboundRequest {
   string id = 2;
   string ref_id = 3;
   string type = 4;
-  string storage_location_id = 5;
 }
 
 message GetOutboundResponse {
@@ -347,8 +400,6 @@ message UpdateOutboundRequest {
   string id = 2;
   string ref_id = 3;
   string type = 4;
-  string storage_location_id = 5;
-  string material_name = 6;
 }
 
 message UpdateOutboundResponse {
@@ -364,51 +415,36 @@ message DeleteOutboundResponse {
   base_resp.BaseResponse base_resp = 1;
 }
 
-// 7. Outbound Material Detail
-message OutboundRecord {
-  string id = 1;
-  string outbound_id = 2;
-  Material material = 3;
-  string create_time = 5;
-  string update_time = 6;
-}
-
+// 9. Outbound Material Detail
 message GetOutboundRecordRequest {
   base_req.BaseRequest base_request = 1;
   string id = 2;
-  string outbound_id = 3;
+  string ref_id = 3;
 }
 
 message GetOutboundRecordResponse {
   base_resp.BaseResponse base_resp = 1;
-  repeated OutboundRecord data = 2;
+  repeated ShelfInventory data = 2;
 }
 
-// 8. Stocktaking
+// 10. Stocktaking, all are same with Inbound
 message Stocktaking {
   string id = 1;
-  string ref_id = 2; // Format: yyyymmdd0000
-  string type = 3; // Stocktaking type
-  repeated string storage_location_ids = 4;
-  repeated string storage_locations = 5;
+  string ref_id = 2;                            // Format: yyyymmdd0000
+  string type = 3;                              // Stocktaking type
+  string source = 4;                            // PDA or manual
+  string note = 5;
   string operator = 6;
-  string result = 7; // Detailed result of stocktaking
+  string status = 7;                            //workflow: Done, Executing, To-do
   string create_time = 8;
   string update_time = 9;
 }
 
-message StocktakingItem {
-  string storage_location_id = 1;
-  repeated string rfids = 2;
-}
-
-// Request and Response messages
 message AddStocktakingRequest {
   base_req.BaseRequest base_request = 1;
   string type = 2;
-  string source = 3;    //PDA or manual
-  repeated StocktakingItem items = 4;   //only for PDA scan
-  string result = 5;
+  string source = 3;                            // PDA or manual
+  repeated ShelfInventory shelf_records = 6;    //source is PDA
 }
 
 message AddStocktakingResponse {
@@ -433,7 +469,6 @@ message UpdateStocktakingRequest {
   string id = 2;
   string ref_id = 3;
   string type = 4;
-  string result = 5;
 }
 
 message UpdateStocktakingResponse {
@@ -447,4 +482,16 @@ message DeleteStocktakingRequest {
 
 message DeleteStocktakingResponse {
   base_resp.BaseResponse base_resp = 1;
+}
+
+// 11. Stocktaking Material Detail
+message GetStocktakingRecordRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string ref_id = 3;
+}
+
+message GetStocktakingRecordResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated ShelfInventory data = 2;
 }
