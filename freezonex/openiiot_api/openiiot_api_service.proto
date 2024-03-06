@@ -262,7 +262,7 @@ service openiiot_api {
     option (api.post) = '/wms/inbound/delete';
   }
   rpc GetInboundRecord(GetInboundRecordRequest) returns (GetInboundRecordResponse) {
-    option (api.post) = '/wms/inbound/record/get';
+    option (api.post) = '/wms/inbound/detail/get';
   }
 
   rpc AddOutbound(AddOutboundRequest) returns (AddOutboundResponse) {
@@ -278,7 +278,7 @@ service openiiot_api {
     option (api.post) = '/wms/outbound/delete';
   }
   rpc GetOutboundRecord(GetOutboundRecordRequest) returns (GetOutboundRecordResponse) {
-    option (api.post) = '/wms/outbound/record/get';
+    option (api.post) = '/wms/outbound/detail/get';
   }
 
   rpc AddStocktaking(AddStocktakingRequest) returns (AddStocktakingResponse) {
@@ -294,7 +294,7 @@ service openiiot_api {
     option (api.post) = '/wms/stocktaking/delete';
   }
   rpc GetStocktakingRecord(GetStocktakingRecordRequest) returns (GetStocktakingRecordResponse) {
-    option (api.post) = '/wms/stockingtaking/record/get';
+    option (api.post) = '/wms/stockingtaking/detail/get';
   }
 
 }

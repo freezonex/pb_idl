@@ -84,8 +84,9 @@ message DeleteWarehouseResponse {
 
 // 2. storage location
 message StorageLocationMaterial {
-  Material material = 1;
-  int32 quantity = 2;
+  string material_id = 1;
+  string material_name = 2;
+  int32 quantity = 3;
 }
 
 message StorageLocation {
@@ -112,9 +113,10 @@ message AddStorageLocationResponse {
 
 message GetStorageLocationRequest {
   base_req.BaseRequest base_request = 1;
-  string warehouse_id = 2;
-  string name = 3;
-  bool return_all_materials = 10;
+  string id = 2;
+  string warehouse_id = 3;
+  string name = 4;
+  bool return_all_materials = 5;
 }
 
 message GetStorageLocationResponse {
@@ -148,27 +150,22 @@ message Material {
   string id = 1;
   string product_code = 2;
   string name = 3;
-  string warehouse_id = 5;
-  string storage_location_id = 6;
-  string storage_location = 7;
-  string product_type = 8;
-  string unit = 9;
-  string note = 10;
-  string create_time = 11;
-  string update_time = 12;
+  string product_type = 4;
+  string unit = 5;
+  string note = 6;
+  repeated string storage_location_id = 7;
+  repeated string storage_location = 8;
+  string create_time = 9;
+  string update_time = 10;
 }
 
 message AddMaterialRequest {
   base_req.BaseRequest base_request = 1;
   string product_code = 2;
   string name = 3;
-  string rfid = 4;
-  string warehouse_id = 5;
-  string storage_location_id = 6;
-  string storage_location = 7;
-  string product_type = 8;
-  string unit = 9;
-  string note = 10;
+  string product_type = 4;
+  string unit = 5;
+  string note = 6;
 }
 
 message AddMaterialResponse {
@@ -181,9 +178,8 @@ message GetMaterialRequest {
   string id = 2;
   string product_code = 3;
   string name = 4;
-  string rfid = 5;
-  string warehouse_id = 6;
-  string storage_location_id = 7;
+  string product_type = 5;
+  string unit = 6;
 }
 
 message GetMaterialResponse {
@@ -196,13 +192,9 @@ message UpdateMaterialRequest {
   string id = 2;
   string product_code = 3;
   string name = 4;
-  string rfid = 5;
-  string warehouse_id = 6;
-  string storage_location_id = 7;
-  string storage_location = 8;
-  string product_type = 9;
-  string unit = 10;
-  string note = 11;
+  string product_type = 5;
+  string unit = 6;
+  string note = 7;
 }
 
 message UpdateMaterialResponse {
@@ -224,7 +216,7 @@ message RfidMaterial {
   string rfid = 2;
   string material_id = 3;
   int32 quantity = 4;
-  Material material = 5;
+  string material_name = 5;
   string create_time = 6;
   string update_time = 7;
 }
@@ -279,7 +271,7 @@ message Inventory {
   string rfid = 1;
   string material_id = 2;
   int32 quantity = 3;
-  Material material = 4;                      
+  string material_name = 4;                      
   int32 stock_quantity = 5;
   int32 discrepancy = 6;
 }
@@ -287,6 +279,7 @@ message Inventory {
 message ShelfInventory {
   string storage_location_id = 1;
   repeated Inventory inventory = 2;
+  string storage_location = 3;
 }
 
 // 6. Inbound
@@ -306,7 +299,9 @@ message AddInboundRequest {
   base_req.BaseRequest base_request = 1;
   string type = 2;
   string source = 3;                            // PDA or manual
-  repeated ShelfInventory shelf_records = 6;    //source is PDA
+  repeated ShelfInventory shelf_records = 4;
+  string note = 5;
+  string status = 6;
 }
 
 message AddInboundResponse {
@@ -331,6 +326,9 @@ message UpdateInboundRequest {
   string id = 2;
   string ref_id = 3;
   string type = 4;
+  string source = 5;
+  string note = 6;
+  string status = 7;
 }
 
 message UpdateInboundResponse {
@@ -346,7 +344,7 @@ message DeleteInboundResponse {
   base_resp.BaseResponse base_resp = 1;
 }
 
-// 7. Inbound Material Detail
+// 7. Inbound Item Detail
 message GetInboundRecordRequest {
   base_req.BaseRequest base_request = 1;
   string id = 2;
@@ -358,7 +356,7 @@ message GetInboundRecordResponse {
   repeated ShelfInventory data = 2;
 }
 
-// 8. Outbound, all are same with Inbound
+// 8. Outbound, all are same with Outbound
 message Outbound {
   string id = 1;
   string ref_id = 2;                            // Format: yyyymmdd0000
@@ -375,7 +373,9 @@ message AddOutboundRequest {
   base_req.BaseRequest base_request = 1;
   string type = 2;
   string source = 3;                            // PDA or manual
-  repeated ShelfInventory shelf_records = 6;    //source is PDA
+  repeated ShelfInventory shelf_records = 4;
+  string note = 5;
+  string status = 6;
 }
 
 message AddOutboundResponse {
@@ -400,6 +400,9 @@ message UpdateOutboundRequest {
   string id = 2;
   string ref_id = 3;
   string type = 4;
+  string source = 5;
+  string note = 6;
+  string status = 7;
 }
 
 message UpdateOutboundResponse {
@@ -415,7 +418,7 @@ message DeleteOutboundResponse {
   base_resp.BaseResponse base_resp = 1;
 }
 
-// 9. Outbound Material Detail
+// 9. Outbound Item Detail
 message GetOutboundRecordRequest {
   base_req.BaseRequest base_request = 1;
   string id = 2;
@@ -427,7 +430,7 @@ message GetOutboundRecordResponse {
   repeated ShelfInventory data = 2;
 }
 
-// 10. Stocktaking, all are same with Inbound
+// 10. Stocktaking, all are same with Inbound & Outbound
 message Stocktaking {
   string id = 1;
   string ref_id = 2;                            // Format: yyyymmdd0000
@@ -484,7 +487,7 @@ message DeleteStocktakingResponse {
   base_resp.BaseResponse base_resp = 1;
 }
 
-// 11. Stocktaking Material Detail
+// 11. Stocktaking Item Detail & result
 message GetStocktakingRecordRequest {
   base_req.BaseRequest base_request = 1;
   string id = 2;
