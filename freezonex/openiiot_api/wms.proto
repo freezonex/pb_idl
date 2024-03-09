@@ -496,5 +496,5 @@ message GetStocktakingRecordRequest {
 
 message GetStocktakingRecordResponse {
   base_resp.BaseResponse base_resp = 1;
-  repeated ShelfInventory data = 2;
+  repeated ShelfInventory1 data = 2;
 }
