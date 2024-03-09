@@ -18,7 +18,7 @@ message Warehouse {
   string note = 9;
   repeated StorageLocation storage_locations = 10;
   string create_time = 11;
-  string update_time = 12;123
+  string update_time = 12;12
 }
 
 message AddWarehouseRequest {
