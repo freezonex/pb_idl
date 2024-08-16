@@ -51,7 +51,6 @@ message UpdateTenantResponse {
 message DeleteTenantRequest {
   base_req.BaseRequest base_request = 1;
   string id = 2;
-  string name = 3;
 }
 
 message DeleteTenantResponse {
