@@ -46,7 +46,15 @@ service openiiot_api {
   rpc GetAllTenantName(GetAllTenantNameRequest) returns (GetAllTenantNameResponse) {
     option (api.post) = '/tenant/allname';
   }
-
+  rpc AddTenantComponent(AddTenantComponentRequest) returns (AddTenantComponentResponse) {
+    option (api.post) = '/tenant/component/add';
+  }
+  rpc DeleteTenantComponent(DeleteTenantComponentRequest) returns (DeleteTenantComponentResponse) {
+    option (api.post) = '/tenant/component/delete';
+  }
+  rpc GetTenantComponent(GetTenantComponentRequest) returns (GetTenantComponentResponse) {
+    option (api.post) = '/tenant/component/get';
+  }
 
   //user
   rpc AddUser(AddUserRequest) returns (AddUserResponse) {

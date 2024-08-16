@@ -66,4 +66,44 @@ message GetAllTenantNameResponse {
   repeated string tenant_names = 2;
 }
 
+message AddTenantComponentRequest {
+  base_req.BaseRequest base_request = 1;
+  string tenant_id = 2;
+  string tenant_name = 3;
+  string component_name = 4;
+}
 
+message AddTenantComponentResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string component_uri = 2;
+}
+
+message DeleteTenantComponentRequest {
+  base_req.BaseRequest base_request = 1;
+  string tenant_id = 2;
+  string tenant_name = 3;
+  string component_name = 4;
+}
+
+message DeleteTenantComponentResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message TenantComponent {
+  string name = 1;
+  string uri = 2;
+  string ready = 3;
+  string status = 4;
+  string restarts = 5;
+  string age = 6;
+}
+
+message GetTenantComponentRequest {
+  base_req.BaseRequest base_request = 1;
+  string component_name = 2;
+}
+
+message GetTenantComponentResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated TenantComponent components = 2;
+}
