@@ -107,5 +107,5 @@ message GetTenantComponentRequest {
 
 message GetTenantComponentResponse {
   base_resp.BaseResponse base_resp = 1;
-  repeated TenantComponent components = 2;
+  repeated TenantComponent data = 2;
 }
