@@ -100,7 +100,9 @@ message TenantComponent {
 
 message GetTenantComponentRequest {
   base_req.BaseRequest base_request = 1;
-  string component_name = 2;
+  string tenant_id = 2;
+  string tenant_name = 3;
+  string component_name = 4;
 }
 
 message GetTenantComponentResponse {
