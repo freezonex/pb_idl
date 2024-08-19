@@ -9,8 +9,9 @@ message Tenant {
   string id = 1;
   string name = 2;
   string description = 3;
-  string create_time = 4;
-  string update_time = 5;
+  bool is_default = 4;
+  string create_time = 5;
+  string update_time = 6;
 }
 
 message AddTenantRequest {
