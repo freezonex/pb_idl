@@ -55,6 +55,9 @@ service openiiot_api {
   rpc GetTenantComponent(GetTenantComponentRequest) returns (GetTenantComponentResponse) {
     option (api.post) = '/tenant/component/get';
   }
+  rpc UpdateTenantComponent(UpdateTenantComponentRequest) returns (UpdateTenantComponentResponse) {
+    option (api.post) = '/tenant/component/update';
+  }
 
   //user
   rpc AddUser(AddUserRequest) returns (AddUserResponse) {

@@ -96,6 +96,7 @@ message TenantComponent {
   string status = 4;
   string restarts = 5;
   string age = 6;
+  string alias = 7;
 }
 
 message GetTenantComponentRequest {
@@ -108,4 +109,16 @@ message GetTenantComponentRequest {
 message GetTenantComponentResponse {
   base_resp.BaseResponse base_resp = 1;
   repeated TenantComponent data = 2;
+}
+
+message UpdateTenantComponentRequest {
+  base_req.BaseRequest base_request = 1;
+  string tenant_id = 2;
+  string tenant_name = 3;
+  string component_name = 4;
+  string component_alias = 5;
+}
+
+message UpdateTenantComponentResponse {
+  base_resp.BaseResponse base_resp = 1;
 }
