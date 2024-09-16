@@ -5,26 +5,34 @@ import "freezonex/common/api.proto";
 import "freezonex/common/base_resp.proto";
 import "freezonex/common/base_req.proto";
 
-message Application {
-  string name = 1;
-  string uri = 2;
+message ApplicationComponent {
+  string component_type = 1;
   string ready = 3;
   string status = 4;
   string restarts = 5;
   string age = 6;
 }
 
+message Application {
+  string name = 1;
+  string uri = 2;
+  repeated ApplicationComponent data = 3;
+}
+
 /*
-application_name must consist of lowercase letters, numbers, and hyphens (-).
-application_name cannot contain uppercase letters, spaces, underscores (_), or other special characters (such as @, #, $, etc.).
-application_name cannot start with a number or end with a hyphen.
-The maximum length of app_name is 253 characters.
+application_name:
+  - must consist of lowercase letters, numbers, and hyphens (-).
+  - cannot contain uppercase letters, spaces, underscores (_), or other special characters (such as @, #, $, etc.).
+  - cannot start with a number or end with a hyphen.
+  - maximum length is 240 characters.
+component_type: frontend, db, backend
 */
 message AddApplicationRequest {
   string tenant_id = 1;
   string tenant_name = 2;
   string application_name = 3;
-  bytes source_file = 4;
+  string component_type = 4;
+  bytes source_file = 5;
 }
 
 message AddApplicationResponse {
@@ -65,6 +73,7 @@ message StartApplicationRequest {
   string tenant_id = 2;
   string tenant_name = 3;
   string application_name = 4;
+  string component_type = 5;
 }
   
 message StartApplicationResponse {
@@ -76,6 +85,7 @@ message StopApplicationRequest {
   string tenant_id = 2;
   string tenant_name = 3;
   string application_name = 4;
+  string component_type = 5;
 }
   
 message StopApplicationResponse {
@@ -87,6 +97,7 @@ message RestartApplicationRequest {
   string tenant_id = 2;
   string tenant_name = 3;
   string application_name = 4;
+  string component_type = 5;
 }
   
 message RestartApplicationResponse {
@@ -98,6 +109,7 @@ message DeleteApplicationRequest {
   string tenant_id = 2;
   string tenant_name = 3;
   string application_name = 4;
+  string component_type = 5;
 }
   
 message DeleteApplicationResponse {
