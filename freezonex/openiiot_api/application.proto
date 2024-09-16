@@ -1,0 +1,105 @@
+syntax = "proto3";
+package freezonex.openiiot_api;
+
+import "freezonex/common/api.proto";
+import "freezonex/common/base_resp.proto";
+import "freezonex/common/base_req.proto";
+
+message Application {
+  string name = 1;
+  string uri = 2;
+  string ready = 3;
+  string status = 4;
+  string restarts = 5;
+  string age = 6;
+}
+
+/*
+application_name must consist of lowercase letters, numbers, and hyphens (-).
+application_name cannot contain uppercase letters, spaces, underscores (_), or other special characters (such as @, #, $, etc.).
+application_name cannot start with a number or end with a hyphen.
+The maximum length of app_name is 253 characters.
+*/
+message AddApplicationRequest {
+  string tenant_id = 1;
+  string tenant_name = 2;
+  string application_name = 3;
+  bytes source_file = 4;
+}
+
+message AddApplicationResponse {
+  base_resp.BaseResponse base_resp = 1;
+  string application_uri = 2;
+}
+
+message GetApplicationRequest {
+  base_req.BaseRequest base_request = 1;
+  string tenant_id = 2;
+  string tenant_name = 3;
+  string application_name = 4;
+}
+
+message GetApplicationResponse {
+  base_resp.BaseResponse base_resp = 1;
+  repeated Application data = 2;
+}
+
+/*message UpdateApplicationRequest {
+  base_req.BaseRequest base_request = 1;
+  string id = 2;
+  string name = 3;
+  string description = 4;
+  string tenant_id = 5;
+  string url = 6;
+  string username = 7;
+  string password = 8;
+  string type = 9;
+}
+  
+message UpdateApplicationResponse {
+  base_resp.BaseResponse base_resp = 1;
+}*/
+
+message StartApplicationRequest {
+  base_req.BaseRequest base_request = 1;
+  string tenant_id = 2;
+  string tenant_name = 3;
+  string application_name = 4;
+}
+  
+message StartApplicationResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message StopApplicationRequest {
+  base_req.BaseRequest base_request = 1;
+  string tenant_id = 2;
+  string tenant_name = 3;
+  string application_name = 4;
+}
+  
+message StopApplicationResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message RestartApplicationRequest {
+  base_req.BaseRequest base_request = 1;
+  string tenant_id = 2;
+  string tenant_name = 3;
+  string application_name = 4;
+}
+  
+message RestartApplicationResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
+
+message DeleteApplicationRequest {
+  base_req.BaseRequest base_request = 1;
+  string tenant_id = 2;
+  string tenant_name = 3;
+  string application_name = 4;
+}
+  
+message DeleteApplicationResponse {
+  base_resp.BaseResponse base_resp = 1;
+}
