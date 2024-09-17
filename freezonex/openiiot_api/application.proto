@@ -45,6 +45,7 @@ message GetApplicationRequest {
   string tenant_id = 2;
   string tenant_name = 3;
   string application_name = 4;
+  string component_type = 5;
 }
 
 message GetApplicationResponse {
