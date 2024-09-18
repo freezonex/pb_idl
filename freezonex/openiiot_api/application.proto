@@ -7,9 +7,10 @@ import "freezonex/common/base_req.proto";
 
 message ApplicationComponent {
   string component_type = 1;
-  string ready = 3;
-  string status = 4;
-  string restarts = 5;
+  string ready = 2;
+  string status = 3;
+  string revision = 4;
+  string create_time = 5;
   string age = 6;
 }
 
