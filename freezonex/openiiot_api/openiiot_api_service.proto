@@ -14,6 +14,7 @@ import "freezonex/openiiot_api/global_config.proto";
 import "freezonex/openiiot_api/emqx.proto";
 import "freezonex/openiiot_api/grafana.proto";
 import "freezonex/openiiot_api/tdengine.proto";
+import "freezonex/openiiot_api/application.proto";
 //option go_package = "freezonex/openiiot/biz/model/openiiot_api_service";
 
 service openiiot_api {
@@ -206,5 +207,24 @@ service openiiot_api {
     option (api.post) = '/tdengine/query';
   }
 
+  //application
+  rpc AddApplication(AddApplicationRequest) returns (AddApplicationResponse) {
+    option (api.post) = '/application/add';
+  }
+  rpc GetApplication(GetApplicationRequest) returns (GetApplicationResponse) {
+    option (api.post) = '/application/get';
+  }
+  rpc StartApplication(StartApplicationRequest) returns (StartApplicationResponse) {
+    option (api.post) = '/application/start';
+  }
+  rpc StopApplication(StopApplicationRequest) returns (StopApplicationResponse) {
+    option (api.post) = '/application/stop';
+  }
+  rpc RestartApplication(RestartApplicationRequest) returns (RestartApplicationResponse) {
+    option (api.post) = '/application/restart';
+  }
+  rpc DeleteApplication(DeleteApplicationRequest) returns (DeleteApplicationResponse) {
+    option (api.post) = '/application/delete';
+  }
 }
 

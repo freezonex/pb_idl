@@ -94,9 +94,10 @@ message TenantComponent {
   string uri = 2;
   string ready = 3;
   string status = 4;
-  string restarts = 5;
-  string age = 6;
-  string alias = 7;
+  string revision = 5;
+  string create_time = 6;
+  string age = 7;
+  string alias = 8;
 }
 
 message GetTenantComponentRequest {
