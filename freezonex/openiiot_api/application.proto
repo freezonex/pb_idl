@@ -94,14 +94,6 @@ message StopApplicationResponse {
   base_resp.BaseResponse base_resp = 1;
 }
 
-message RestartApplicationRequest {
-  base_req.BaseRequest base_request = 1;
-  string tenant_id = 2;
-  string tenant_name = 3;
-  string application_name = 4;
-  string component_type = 5;
-}
-  
 message RestartApplicationResponse {
   base_resp.BaseResponse base_resp = 1;
 }
